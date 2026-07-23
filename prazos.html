@@ -124,27 +124,27 @@ const RANGE_START="2026-06-25", RANGE_END="2026-08-30";
 const PUB_LIMIT="2026-07-10", EVENTO="2026-08-30";
 // est: feito=concluído | reassinar | hoje=publicar 10/07 | externo=PROGE | certame | exec
 const ITEMS=[
- {id:"autuar", g:"Instrução (concluída)", name:"Autuar processo no SEI", doc:"9019724", est:"feito", done:true, start:"2026-06-25", end:"2026-06-26", deadline:"2026-06-26"},
- {id:"dfd",    g:"Instrução (concluída)", name:"DFD — assinado (Sidnei, 26/06)", doc:"8983261", est:"feito", done:true, start:"2026-06-26", end:"2026-06-26", deadline:"2026-06-26"},
- {id:"etp",    g:"Instrução (concluída)", name:"ETP — assinado", doc:"9022175", est:"feito", done:true, start:"2026-07-02", end:"2026-07-02", deadline:"2026-07-02"},
- {id:"anexos", g:"Instrução (concluída)", name:"Anexos I–VI — assinados", doc:"—", est:"feito", done:true, start:"2026-07-02", end:"2026-07-02", deadline:"2026-07-02"},
- {id:"errata", g:"Instrução (concluída)", name:"Errata do DFD (hidratação 12.300) — assinada", doc:"9034557", est:"feito", done:true, start:"2026-07-03", end:"2026-07-03", deadline:"2026-07-03"},
- {id:"parecer",g:"Instrução (concluída)", name:"Parecer PROGE nº 976/2026 — favorável", doc:"9060690", est:"externo", done:true, start:"2026-07-07", end:"2026-07-07", deadline:"2026-07-07"},
- {id:"edital", g:"Instrução (concluída)", name:"Edital publicado em 13/07 (DOM 4877) — versão retificada 9107594", doc:"9023290", est:"reassinar", done:true, start:"2026-07-09", end:"2026-07-09", deadline:"2026-07-10"},
- {id:"portaria",g:"Instrução (concluída)", name:"Portaria nº 500/2026 (Comissão) — assinada, publica 10/07", doc:"9033227", est:"hoje", done:true, start:"2026-07-10", end:"2026-07-10", deadline:"2026-07-10"},
+ {id:"autuar", g:"Instrução (concluída)", name:"1. Autuar processo no SEI", doc:"9019724", est:"feito", done:true, start:"2026-06-25", end:"2026-06-26", deadline:"2026-06-26"},
+ {id:"dfd",    g:"Instrução (concluída)", name:"2. DFD — assinado (Sidnei, 26/06)", doc:"8983261", est:"feito", done:true, start:"2026-06-26", end:"2026-06-26", deadline:"2026-06-26"},
+ {id:"etp",    g:"Instrução (concluída)", name:"3. ETP — assinado", doc:"9022175", est:"feito", done:true, start:"2026-07-02", end:"2026-07-02", deadline:"2026-07-02"},
+ {id:"anexos", g:"Instrução (concluída)", name:"4. Anexos I–VI — assinados", doc:"—", est:"feito", done:true, start:"2026-07-02", end:"2026-07-02", deadline:"2026-07-02"},
+ {id:"errata", g:"Instrução (concluída)", name:"5. Errata do DFD (hidratação 12.300) — assinada", doc:"9034557", est:"feito", done:true, start:"2026-07-03", end:"2026-07-03", deadline:"2026-07-03"},
+ {id:"parecer",g:"Instrução (concluída)", name:"6. Parecer PROGE nº 976/2026 — favorável", doc:"9060690", est:"externo", done:true, start:"2026-07-07", end:"2026-07-07", deadline:"2026-07-07"},
+ {id:"edital", g:"Instrução (concluída)", name:"7. Edital publicado em 13/07 (DOM 4877) — versão retificada 9107594", doc:"9023290", est:"reassinar", done:true, start:"2026-07-09", end:"2026-07-09", deadline:"2026-07-10"},
+ {id:"portaria",g:"Instrução (concluída)", name:"8. Portaria nº 500/2026 (Comissão) — assinada, publica 10/07", doc:"9033227", est:"hoje", done:true, start:"2026-07-10", end:"2026-07-10", deadline:"2026-07-10"},
 
- {id:"pub",    g:"Certame (13/07 → assinatura)", name:"DLIC + publicação do Edital (Diário, extraordinária)", doc:"—", est:"certame", done:true, start:"2026-07-10", end:"2026-07-10", deadline:"2026-07-10"},
- {id:"impug",  g:"Certame (13/07 → assinatura)", name:"Impugnação/esclarecimentos (3 d.u.) — até 15/07", doc:"—", est:"certame", done:true, start:"2026-07-11", end:"2026-07-15", deadline:"2026-07-15"},
- {id:"receb",  g:"Certame (13/07 → assinatura)", name:"Recebimento de propostas (15 dias corridos) — encerra 28/07 14h", doc:"—", est:"certame", done:false, start:"2026-07-11", end:"2026-07-27", deadline:"2026-07-27"},
- {id:"habil",  g:"Certame (13/07 → assinatura)", name:"Análise/julgamento (28/07 14h30)", doc:"—", est:"certame", done:false, start:"2026-07-27", end:"2026-07-27", deadline:"2026-07-27"},
- {id:"result", g:"Certame (13/07 → assinatura)", name:"Divulgação do resultado + Diário (28/07)", doc:"—", est:"certame", done:false, start:"2026-07-28", end:"2026-07-28", deadline:"2026-07-28"},
- {id:"recurso",g:"Certame (13/07 → assinatura)", name:"Anuência/renúncia ao recurso (29/07)", doc:"—", est:"certame", done:false, start:"2026-07-29", end:"2026-07-29", deadline:"2026-07-29"},
- {id:"homolog",g:"Certame (13/07 → assinatura)", name:"Homologação (30/07)", doc:"—", est:"certame", done:false, start:"2026-07-30", end:"2026-07-30", deadline:"2026-07-30"},
- {id:"assina", g:"Certame (13/07 → assinatura)", name:"Assinatura dos Termos (até 3 d.u.) — até 04/08", doc:"08_Anexo_V", est:"certame", done:false, start:"2026-07-30", end:"2026-08-04", deadline:"2026-08-04"},
+ {id:"pub",    g:"Certame (13/07 → assinatura)", name:"9. DLIC + publicação do Edital (Diário, extraordinária)", doc:"—", est:"certame", done:true, start:"2026-07-10", end:"2026-07-10", deadline:"2026-07-10"},
+ {id:"impug",  g:"Certame (13/07 → assinatura)", name:"10. Impugnação/esclarecimentos (3 d.u.) — até 15/07", doc:"—", est:"certame", done:true, start:"2026-07-11", end:"2026-07-15", deadline:"2026-07-15"},
+ {id:"receb",  g:"Certame (13/07 → assinatura)", name:"11. Recebimento de propostas (15 dias corridos) — encerra 28/07 14h", doc:"—", est:"certame", done:false, start:"2026-07-11", end:"2026-07-27", deadline:"2026-07-27"},
+ {id:"habil",  g:"Certame (13/07 → assinatura)", name:"12. Análise/julgamento (28/07 14h30)", doc:"—", est:"certame", done:false, start:"2026-07-27", end:"2026-07-27", deadline:"2026-07-27"},
+ {id:"result", g:"Certame (13/07 → assinatura)", name:"13. Divulgação do resultado + Diário (28/07)", doc:"—", est:"certame", done:false, start:"2026-07-28", end:"2026-07-28", deadline:"2026-07-28"},
+ {id:"recurso",g:"Certame (13/07 → assinatura)", name:"14. Anuência/renúncia ao recurso (29/07)", doc:"—", est:"certame", done:false, start:"2026-07-29", end:"2026-07-29", deadline:"2026-07-29"},
+ {id:"homolog",g:"Certame (13/07 → assinatura)", name:"15. Homologação (30/07)", doc:"—", est:"certame", done:false, start:"2026-07-30", end:"2026-07-30", deadline:"2026-07-30"},
+ {id:"assina", g:"Certame (13/07 → assinatura)", name:"16. Assinatura dos Termos (até 3 d.u.) — até 04/08", doc:"08_Anexo_V", est:"certame", done:false, start:"2026-07-30", end:"2026-08-04", deadline:"2026-08-04"},
 
- {id:"prod",   g:"Execução", name:"Produção dos itens (12 dias) → kit pronto ~20/08", doc:"—", est:"exec", done:false, start:"2026-08-05", end:"2026-08-20", deadline:"2026-08-26"},
- {id:"entrega",g:"Execução", name:"Entrega de kits ao público (sex/sáb)", doc:"—", est:"exec", done:false, start:"2026-08-28", end:"2026-08-29", deadline:"2026-08-29"},
- {id:"evento", g:"Execução", name:"I Corrida de Rua da Guarda Municipal", doc:"—", est:"exec", done:false, start:"2026-08-30", end:"2026-08-30", deadline:"2026-08-30"},
+ {id:"prod",   g:"Execução", name:"17. Produção dos itens (12 dias) → kit pronto ~20/08", doc:"—", est:"exec", done:false, start:"2026-08-05", end:"2026-08-20", deadline:"2026-08-26"},
+ {id:"entrega",g:"Execução", name:"18. Entrega de kits ao público (sex/sáb)", doc:"—", est:"exec", done:false, start:"2026-08-28", end:"2026-08-29", deadline:"2026-08-29"},
+ {id:"evento", g:"Execução", name:"19. I Corrida de Rua da Guarda Municipal", doc:"—", est:"exec", done:false, start:"2026-08-30", end:"2026-08-30", deadline:"2026-08-30"},
 ];
 const KEY="gcm_checklist_v2";
 let state=JSON.parse(localStorage.getItem(KEY)||"null");
