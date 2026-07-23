@@ -23,7 +23,8 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .top nav .nrow{display:flex;align-items:center;justify-content:center}
 .top nav .nrow.r1{gap:clamp(10px,1.6vw,26px);font-size:clamp(12px,1.05vw,14px)}
 .top nav .nrow.r1 a{font-weight:700;letter-spacing:.4px;padding:2px 2px}
-.top nav .nrow.r2{gap:14px}
+.top nav .nrow.r2{gap:14px;font-size:clamp(12px,1.05vw,14px)}
+.top nav .nrow.r2 a:not(.cta):not(.bpat){font-weight:700;letter-spacing:.4px}
 .top nav .bpat{background:var(--verde);color:var(--navy)!important;border:1px solid #fff;border-radius:9px;font-weight:800;font-size:12.5px;padding:6px 18px}
 .top nav .bpat:hover{transform:translateY(-2px)}
 .top nav a{color:var(--txt);text-decoration:none;font-weight:600;position:relative;padding:6px 2px;transition:color .25s,transform .25s;display:inline-block;white-space:nowrap}
@@ -172,13 +173,14 @@ footer .t b{color:#fff}
   <div class="t">I CORRIDA DA GUARDA MUNICIPAL<small>MARINGÁ · PARANÁ · 30/08/2026</small></div>
   <nav>
     <div class="nrow r1">
+      <a href="#inicio">Início</a>
       <a href="#historia">Prova</a><a href="#midia">Mídia</a>
       <a href="#modalidades">Modalidades</a>
       <a href="#kit">Kit</a>
-      <a href="#percursos">Regulamento</a>
-      <a href="#local">Largada</a>
     </div>
     <div class="nrow r2">
+      <a href="#percursos">Regulamento</a>
+      <a href="#local">Largada</a>
       <a class="bpat" href="#patrocinio">Quero patrocinar</a>
       <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">Inscreva-se</a>
     </div>
@@ -190,7 +192,7 @@ footer .t b{color:#fff}
   </div>
 </div></div>
 
-<div class="hero"><div class="hbg" id="hbg1"></div><div class="hbg" id="hbg2"></div><div class="hgrad"></div><div class="wrap">
+<div class="hero" id="inicio"><div class="hbg" id="hbg1"></div><div class="hbg" id="hbg2"></div><div class="hgrad"></div><div class="wrap">
   <span class="eye">19 ANOS DA GUARDA CIVIL MUNICIPAL</span>
   <h1>I CORRIDA DA<br><b>GUARDA MUNICIPAL</b><br>DE MARINGÁ</h1>
   <div class="sub"><b>30 de agosto de 2026 · Domingo</b><br>Concentração às 6h00 · <b>Largada às 7h30</b> · Av. Rebouças, 900<br>Corrida 7 km · Caminhada 3 km · Corrida Kids (100 a 400 m)</div>
