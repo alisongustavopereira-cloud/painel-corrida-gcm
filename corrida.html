@@ -6,63 +6,7 @@
 <title>I Corrida da Guarda Municipal de Maringá · 30/08/2026</title>
 <meta name="description" content="I Corrida da Guarda Municipal de Maringá — 30 de agosto de 2026. Corrida 7 km, Caminhada 3 km e Kids 300 m. Inscreva-se!">
 <link rel="icon" href="assets/distintivo.png">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js">
-// rotacao de fotos do hero (3 melhores)
-(function(){
-  const heroImgs=['assets/g14.jpg','assets/g11.jpg','assets/g01.jpg'];
-  heroImgs.forEach(u=>{const i=new Image();i.src=u;});
-  const a=document.getElementById('hbg1'), b=document.getElementById('hbg2');
-  let idx=0, cur=a;
-  a.style.backgroundImage=`url(${heroImgs[0]})`; a.classList.add('on');
-  setInterval(()=>{
-    idx=(idx+1)%heroImgs.length;
-    const nxt=(cur===a)?b:a;
-    nxt.style.backgroundImage=`url(${heroImgs[idx]})`;
-    nxt.classList.add('on'); cur.classList.remove('on'); cur=nxt;
-  },6000);
-})();
-// galeria aleatoria
-(function(){
-  const all=Array.from({length:14},(_,i)=>'assets/g'+String(i+1).padStart(2,'0')+'.jpg');
-  all.forEach(u=>{const i=new Image();i.src=u;});
-  const slots=[document.getElementById('gal0'),document.getElementById('gal1'),document.getElementById('gal2')];
-  const atuais=[0,6,13];
-  function troca(slot){
-    let n; do{n=Math.floor(Math.random()*all.length);}while(atuais.includes(n));
-    atuais[slot]=n;
-    const el=slots[slot];
-    el.style.opacity=0;
-    setTimeout(()=>{el.src=all[n];el.style.opacity=1;},700);
-  }
-  let s=0;
-  setInterval(()=>{troca(s);s=(s+1)%3;},3500);
-})();
 
-// previsao do tempo (Open-Meteo)
-(function(){
-  const ICO={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌦️',61:'🌧️',63:'🌧️',65:'🌧️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
-  fetch('https://api.open-meteo.com/v1/forecast?latitude=-23.42&longitude=-51.93&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=America%2FSao_Paulo&forecast_days=14')
-  .then(r=>r.json()).then(d=>{
-    const g=document.getElementById('tempoGrid'); g.innerHTML='';
-    const DS=['DOM','SEG','TER','QUA','QUI','SEX','SÁB'];
-    let temProva=false;
-    d.daily.time.slice(0,7).concat(d.daily.time.includes('2026-08-30')&&d.daily.time.indexOf('2026-08-30')>=7?['2026-08-30']:[]).forEach(t=>{
-      const i=d.daily.time.indexOf(t);
-      const dt=new Date(t+'T12:00:00-03:00');
-      const prova=(t==='2026-08-30'); if(prova)temProva=true;
-      g.insertAdjacentHTML('beforeend',
-       `<div class="tcard${prova?' prova':''}">
-         <div class="dia">${prova?'🏁 DIA DA PROVA':DS[dt.getDay()]+' '+String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')}</div>
-         <div class="ico">${ICO[d.daily.weather_code[i]]||'🌡️'}</div>
-         <div class="tmax">${Math.round(d.daily.temperature_2m_max[i])}°C</div>
-         <div class="tmin">mín ${Math.round(d.daily.temperature_2m_min[i])}°C</div>
-         <div class="chuva">💧 ${d.daily.precipitation_probability_max[i]??0}%</div>
-       </div>`);
-    });
-    if(temProva)document.getElementById('tempoNota').textContent='Fonte: Open-Meteo · Previsão do dia da prova em destaque.';
-  }).catch(()=>{document.getElementById('tempoGrid').innerHTML='<div class="tcard"><div class="dia">Previsão indisponível no momento</div></div>';});
-})();
-</script>
 <style>
 :root{--navy:#2A2C46;--card:#353A61;--line:#474C77;--verde:#8CC63F;--verde2:#6FA32E;--laranja:#F4A24A;--coral:#FF6B6B;--amarelo:#FFC94D;--txt:#C9CEE4;--muted:#A8AFCB}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -80,7 +24,7 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .top nav a:not(.cta)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--verde);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
 .top nav a:not(.cta):hover{color:#fff;transform:translateY(-2px)}
 .top nav a:not(.cta):hover::after{transform:scaleX(1)}
-.top .lgadm{height:30px;margin-left:16px}
+.top .lgadm{margin-left:16px}
 @media(max-width:900px){.top .lgadm{display:none}}
 .top .cta{background:var(--verde);color:var(--navy)!important;padding:8px 16px;border-radius:9px;font-weight:800}
 @media(max-width:760px){.top nav a:not(.cta){display:none}}
@@ -171,6 +115,15 @@ footer .t b{color:#fff}
 .tcard .tmin{font-size:12.5px;color:var(--muted)}
 .tcard .chuva{font-size:11px;color:#7CC0FF;margin-top:4px}
 .tempo-nota{font-size:11.5px;color:var(--muted);margin-top:12px}
+.hist{background:#232540}
+.tl{position:relative;margin-top:36px;padding-left:26px;border-left:3px solid var(--verde)}
+.tlitem{position:relative;padding:0 0 30px 22px}
+.tlitem::before{content:"";position:absolute;left:-13px;top:4px;width:17px;height:17px;border-radius:50%;background:var(--verde);border:4px solid #232540}
+.tlitem .ano{font-size:13px;font-weight:800;letter-spacing:2px;color:var(--verde)}
+.tlitem.hoje .ano{color:var(--amarelo)}
+.tlitem.hoje::before{background:var(--amarelo)}
+.tlitem h3{font-size:17px;margin:4px 0 6px}
+.tlitem p{color:var(--muted);font-size:14px;line-height:1.9;max-width:700px}
 </style>
 </head>
 <body>
@@ -179,13 +132,18 @@ footer .t b{color:#fff}
   <img class="crestt" src="assets/distintivo.png" alt="GCM">
   <div class="t">I CORRIDA DA GUARDA MUNICIPAL<small>MARINGÁ · PARANÁ · 30/08/2026</small></div>
   <nav>
+    <a href="#historia">A prova</a>
     <a href="#modalidades">Modalidades</a>
     <a href="#kit">Kit</a>
     <a href="#local">Largada</a>
     <a href="#patrocinio" style="color:#8CC63F;font-weight:800">Quero patrocinar</a>
     <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">Inscreva-se</a>
   </nav>
-  <img class="lgadm" src="assets/logo_prefeitura.png" alt="Prefeitura de Maringá">
+  <div class="lgadm" style="display:flex;align-items:center;gap:12px">
+    <div style="text-align:right;font-size:10.5px;line-height:1.25;color:#fff">Secretaria de<br><b>Segurança Municipal</b></div>
+    <div style="width:1px;height:34px;background:rgba(255,255,255,.35)"></div>
+    <img src="assets/logo_prefeitura.png" alt="Prefeitura de Maringá" style="height:30px">
+  </div>
 </div></div>
 
 <div class="hero"><div class="hbg" id="hbg1"></div><div class="hbg" id="hbg2"></div><div class="hgrad"></div><div class="wrap">
@@ -233,6 +191,33 @@ footer .t b{color:#fff}
   </div>
 </div></section>
 
+
+<section class="hist" id="historia"><div class="wrap">
+  <div class="sec-eye">A PROVA</div>
+  <h2>Uma história que começou na lei — e termina na linha de chegada</h2>
+  <div class="tl">
+    <div class="tlitem">
+      <div class="ano">2007</div>
+      <h3>Nasce a Guarda Civil Municipal de Maringá</h3>
+      <p>Criada para proteger os bens, serviços e instalações do Município, a GCM cresceu junto com a cidade — e hoje está nas escolas, nas ruas, no videomonitoramento e no coração da comunidade maringaense.</p>
+    </div>
+    <div class="tlitem">
+      <div class="ano">2018</div>
+      <h3>Lei Municipal nº 10.671/2018</h3>
+      <p>De autoria do vereador William Gentil, a lei criou a base legal para os eventos institucionais da Guarda, aproximando a corporação da população que ela protege.</p>
+    </div>
+    <div class="tlitem">
+      <div class="ano">2026</div>
+      <h3>Lei nº 12.163/2026 e Decreto nº 937/2026</h3>
+      <p>A Lei nº 12.163/2026 aprimorou a legislação e instituiu oficialmente a Corrida da Guarda Municipal, regulamentada em seguida pelo Decreto nº 937/2026, na gestão do Secretário de Segurança Municipal, Dr. Luiz Cláudio Alves.</p>
+    </div>
+    <div class="tlitem hoje">
+      <div class="ano">30/08/2026</div>
+      <h3>A primeira largada — nos 19 anos da GCM</h3>
+      <p>A I Corrida da Guarda Municipal celebra o aniversário de 19 anos da corporação com esporte, família e solidariedade: cada inscrição doa 1 litro de leite para ações sociais do Município. Você faz parte dessa história.</p>
+    </div>
+  </div>
+</div></section>
 <section class="kit" id="kit"><div class="wrap">
   <div class="sec-eye">KIT DO ATLETA</div>
   <h2>O que você recebe</h2>
@@ -337,6 +322,63 @@ fetch('dados_inscricoes.json').then(r=>r.json()).then(d=>{
   };
   document.head.appendChild(s);
 })();
+
+// rotacao de fotos do hero (3 melhores)
+(function(){
+  const heroImgs=['assets/g14.jpg','assets/g11.jpg','assets/g01.jpg'];
+  heroImgs.forEach(u=>{const i=new Image();i.src=u;});
+  const a=document.getElementById('hbg1'), b=document.getElementById('hbg2');
+  let idx=0, cur=a;
+  a.style.backgroundImage=`url(${heroImgs[0]})`; a.classList.add('on');
+  setInterval(()=>{
+    idx=(idx+1)%heroImgs.length;
+    const nxt=(cur===a)?b:a;
+    nxt.style.backgroundImage=`url(${heroImgs[idx]})`;
+    nxt.classList.add('on'); cur.classList.remove('on'); cur=nxt;
+  },6000);
+})();
+// galeria aleatoria
+(function(){
+  const all=Array.from({length:14},(_,i)=>'assets/g'+String(i+1).padStart(2,'0')+'.jpg');
+  all.forEach(u=>{const i=new Image();i.src=u;});
+  const slots=[document.getElementById('gal0'),document.getElementById('gal1'),document.getElementById('gal2')];
+  const atuais=[0,6,13];
+  function troca(slot){
+    let n; do{n=Math.floor(Math.random()*all.length);}while(atuais.includes(n));
+    atuais[slot]=n;
+    const el=slots[slot];
+    el.style.opacity=0;
+    setTimeout(()=>{el.src=all[n];el.style.opacity=1;},700);
+  }
+  let s=0;
+  setInterval(()=>{troca(s);s=(s+1)%3;},3500);
+})();
+
+// previsao do tempo (Open-Meteo)
+(function(){
+  const ICO={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌦️',61:'🌧️',63:'🌧️',65:'🌧️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-23.42&longitude=-51.93&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=America%2FSao_Paulo&forecast_days=14')
+  .then(r=>r.json()).then(d=>{
+    const g=document.getElementById('tempoGrid'); g.innerHTML='';
+    const DS=['DOM','SEG','TER','QUA','QUI','SEX','SÁB'];
+    let temProva=false;
+    d.daily.time.slice(0,7).concat(d.daily.time.includes('2026-08-30')&&d.daily.time.indexOf('2026-08-30')>=7?['2026-08-30']:[]).forEach(t=>{
+      const i=d.daily.time.indexOf(t);
+      const dt=new Date(t+'T12:00:00-03:00');
+      const prova=(t==='2026-08-30'); if(prova)temProva=true;
+      g.insertAdjacentHTML('beforeend',
+       `<div class="tcard${prova?' prova':''}">
+         <div class="dia">${prova?'🏁 DIA DA PROVA':DS[dt.getDay()]+' '+String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')}</div>
+         <div class="ico">${ICO[d.daily.weather_code[i]]||'🌡️'}</div>
+         <div class="tmax">${Math.round(d.daily.temperature_2m_max[i])}°C</div>
+         <div class="tmin">mín ${Math.round(d.daily.temperature_2m_min[i])}°C</div>
+         <div class="chuva">💧 ${d.daily.precipitation_probability_max[i]??0}%</div>
+       </div>`);
+    });
+    if(temProva)document.getElementById('tempoNota').textContent='Fonte: Open-Meteo · Previsão do dia da prova em destaque.';
+  }).catch(()=>{document.getElementById('tempoGrid').innerHTML='<div class="tcard"><div class="dia">Previsão indisponível no momento</div></div>';});
+})();
+
 </script>
 </body>
 </html>
