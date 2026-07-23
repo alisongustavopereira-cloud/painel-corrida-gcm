@@ -6,7 +6,38 @@
 <title>I Corrida da Guarda Municipal de Maringá · 30/08/2026</title>
 <meta name="description" content="I Corrida da Guarda Municipal de Maringá — 30 de agosto de 2026. Corrida 7 km, Caminhada 3 km e Kids 300 m. Inscreva-se!">
 <link rel="icon" href="assets/distintivo.png">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js">
+// rotacao de fotos do hero (3 melhores)
+(function(){
+  const heroImgs=['assets/g14.jpg','assets/g11.jpg','assets/g01.jpg'];
+  heroImgs.forEach(u=>{const i=new Image();i.src=u;});
+  const a=document.getElementById('hbg1'), b=document.getElementById('hbg2');
+  let idx=0, cur=a;
+  a.style.backgroundImage=`url(${heroImgs[0]})`; a.classList.add('on');
+  setInterval(()=>{
+    idx=(idx+1)%heroImgs.length;
+    const nxt=(cur===a)?b:a;
+    nxt.style.backgroundImage=`url(${heroImgs[idx]})`;
+    nxt.classList.add('on'); cur.classList.remove('on'); cur=nxt;
+  },6000);
+})();
+// galeria aleatoria
+(function(){
+  const all=Array.from({length:14},(_,i)=>'assets/g'+String(i+1).padStart(2,'0')+'.jpg');
+  all.forEach(u=>{const i=new Image();i.src=u;});
+  const slots=[document.getElementById('gal0'),document.getElementById('gal1'),document.getElementById('gal2')];
+  const atuais=[0,6,13];
+  function troca(slot){
+    let n; do{n=Math.floor(Math.random()*all.length);}while(atuais.includes(n));
+    atuais[slot]=n;
+    const el=slots[slot];
+    el.style.opacity=0;
+    setTimeout(()=>{el.src=all[n];el.style.opacity=1;},700);
+  }
+  let s=0;
+  setInterval(()=>{troca(s);s=(s+1)%3;},3500);
+})();
+</script>
 <style>
 :root{--navy:#2A2C46;--card:#353A61;--line:#474C77;--verde:#8CC63F;--verde2:#6FA32E;--laranja:#F4A24A;--coral:#FF6B6B;--amarelo:#FFC94D;--txt:#C9CEE4;--muted:#A8AFCB}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -25,13 +56,16 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .top .cta{background:var(--verde);color:var(--navy)!important;padding:8px 16px;border-radius:9px;font-weight:800}
 @media(max-width:760px){.top nav a:not(.cta){display:none}}
 /* hero */
-.hero{position:relative;min-height:520px;display:flex;align-items:center;
- background:linear-gradient(100deg,rgba(30,32,54,.95) 0%,rgba(32,34,56,.82) 45%,rgba(38,40,64,.55) 100%),url(assets/capa.jpg) center 35%/cover no-repeat}
+.hero{position:relative;min-height:520px;display:flex;align-items:center;background:#232540;overflow:hidden}
+.hbg{position:absolute;inset:0;background-size:cover;background-position:center 35%;opacity:0;transition:opacity 1.6s ease}
+.hbg.on{opacity:1}
+.hgrad{position:absolute;inset:0;background:linear-gradient(100deg,rgba(30,32,54,.95) 0%,rgba(32,34,56,.84) 45%,rgba(38,40,64,.58) 100%)}
+.hero .wrap{position:relative;z-index:2}
 .hero .wrap{padding:64px 20px}
 .eye{display:inline-block;background:var(--verde);color:var(--navy);font-weight:800;font-size:12px;letter-spacing:2px;padding:6px 14px;border-radius:16px;margin-bottom:16px}
 .hero h1{font-size:clamp(30px,5.5vw,54px);line-height:1.06;letter-spacing:-1px;max-width:760px}
 .hero h1 b{color:var(--verde)}
-.hero .sub{margin-top:14px;font-size:clamp(14px,2vw,18px);color:var(--txt)}
+.hero .sub{margin-top:18px;font-size:clamp(14px,2vw,17px);color:var(--txt);line-height:2}
 .hero .sub b{color:#fff}
 .btn{display:inline-block;background:var(--verde);color:var(--navy);font-weight:800;font-size:16px;padding:15px 34px;border-radius:12px;text-decoration:none;margin-top:26px;box-shadow:0 6px 18px rgba(140,198,63,.35);transition:transform .15s}
 .btn:hover{transform:translateY(-2px)}
@@ -42,15 +76,15 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .count b{display:block;font-size:30px;letter-spacing:-1px}
 .count span{font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:700}
 /* stats strip */
-.strip{background:var(--verde);color:var(--navy)}
+.strip{background:linear-gradient(100deg,#5E8F26,#6FA32E 60%,#7DB737);color:#fff}
 .strip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;padding:20px}
 .strip b{font-size:26px;letter-spacing:-1px;display:block}
-.strip span{font-size:12px;font-weight:700}
+.strip span{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:1px}
 /* sections */
 section{padding:64px 0}
 .sec-eye{color:var(--verde);font-size:12px;font-weight:800;letter-spacing:2.4px;margin-bottom:8px}
 h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.5px;margin-bottom:10px}
-.lead{color:var(--muted);max-width:720px;font-size:15px;line-height:1.6}
+.lead{color:var(--muted);max-width:680px;font-size:15px;line-height:1.9}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:34px}
 .mcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative;overflow:hidden}
 .mcard.destacado{border-color:var(--verde)}
@@ -78,11 +112,11 @@ h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.5px;margin-bottom:10px}
 #mapa{height:340px;border-radius:16px;border:1px solid var(--line);margin-top:28px}
 /* fotos */
 .fotostrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:30px}
-.fotostrip img{width:100%;height:200px;object-fit:cover;border-radius:14px;border:1px solid var(--line)}
+.fotostrip img{width:100%;height:220px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:opacity .8s ease}
 /* patrocinio */
-.patro{background:linear-gradient(115deg,#233016,#2f4318);border-radius:18px;padding:36px;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.patro{background:linear-gradient(115deg,#233016,#2f4318);border:2px solid var(--verde);border-radius:22px;padding:40px 44px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .patro h3{font-size:22px;margin-bottom:8px}
-.patro p{color:#CFE9A8;font-size:14px;max-width:600px}
+.patro p{color:#CFE9A8;font-size:14px;max-width:600px;line-height:1.9;margin-top:6px}
 .patro .btn{margin-top:0;margin-left:auto}
 /* passos */
 .passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:30px}
@@ -108,18 +142,17 @@ footer .t b{color:#fff}
     <a href="#modalidades">Modalidades</a>
     <a href="#kit">Kit</a>
     <a href="#local">Largada</a>
-    <a href="#patrocinio">Patrocínio</a>
-    <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/" target="_blank" rel="noopener">Inscreva-se</a>
+    <a href="#patrocinio" style="color:#8CC63F;font-weight:800">Quero patrocinar</a>
+    <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">Inscreva-se</a>
   </nav>
 </div></div>
 
-<div class="hero"><div class="wrap">
+<div class="hero"><div class="hbg" id="hbg1"></div><div class="hbg" id="hbg2"></div><div class="hgrad"></div><div class="wrap">
   <span class="eye">19 ANOS DA GUARDA CIVIL MUNICIPAL</span>
   <h1>I CORRIDA DA<br><b>GUARDA MUNICIPAL</b><br>DE MARINGÁ</h1>
-  <div class="sub"><b>30 de agosto de 2026 · Domingo · 7h30</b> · Largada na Av. Rebouças, 900<br>
-  Corrida 7 km · Caminhada 3 km · Kids 300 m</div>
+  <div class="sub"><b>30 de agosto de 2026 · Domingo</b><br>Concentração às 6h00 · <b>Largada às 7h30</b> · Av. Rebouças, 900<br>Corrida 7 km · Caminhada 3 km · Kids 300 m</div>
   <div>
-    <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/" target="_blank" rel="noopener">INSCREVA-SE AGORA</a>
+    <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">INSCREVA-SE AGORA</a>
     <a class="btn ghost" href="#modalidades">Saiba mais</a>
   </div>
   <div class="count" id="count"></div>
@@ -194,15 +227,15 @@ footer .t b{color:#fff}
     <div class="passo"><div class="n">4</div><b>Retire seu kit</b><span>Leve o litro de leite na retirada, na semana do evento. Local e horários serão divulgados.</span></div>
   </div>
   <div style="text-align:center;margin-top:36px">
-    <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/" target="_blank" rel="noopener">FAZER MINHA INSCRIÇÃO</a>
+    <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">FAZER MINHA INSCRIÇÃO</a>
   </div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
   <div class="fotostrip">
-    <img src="assets/equipe.jpg" alt="Equipe GCM">
-    <img src="assets/proximidade.jpg" alt="GCM e comunidade">
-    <img src="assets/evento.jpg" alt="Efetivo da GCM">
+    <img id="gal0" src="assets/g01.jpg" alt="GCM Maringá">
+    <img id="gal1" src="assets/g07.jpg" alt="GCM Maringá">
+    <img id="gal2" src="assets/g14.jpg" alt="GCM Maringá">
   </div>
 </div></section>
 
@@ -220,7 +253,7 @@ footer .t b{color:#fff}
   <img src="assets/distintivo.png" alt="GCM Maringá">
   <div class="t">
     <b>Prefeitura do Município de Maringá</b> · Secretaria de Segurança Municipal · Guarda Civil Municipal<br>
-    Rua Ivan Pavlov, 110 — Jardim Alvorada · (44) 3221-8668 · Evento instituído pela Lei Municipal nº 10.671/2018 e Decreto nº 937/2026<br>
+    Sede do Comando da GCM — Av. Rebouças, 900 · (44) 3221-8668<br>Evento instituído pela Lei Municipal nº 10.671/2018 e regulamentado pelo Decreto Municipal nº 937/2026<br>
     Inscrições e regulamento: <a href="https://sisweb.maringa.pr.gov.br/prova_gcm/" style="color:#8CC63F">sisweb.maringa.pr.gov.br/prova_gcm</a>
   </div>
 </div></footer>
