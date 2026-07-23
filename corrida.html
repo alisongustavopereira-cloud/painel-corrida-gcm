@@ -19,10 +19,13 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .top img.crestt{height:52px}
 .top .t{font-size:12.5px;font-weight:700;line-height:1.25;white-space:nowrap}
 .top .t small{display:block;font-weight:400;color:var(--muted);font-size:10.5px;letter-spacing:1px}
-.top nav{margin-left:auto;display:flex;flex-direction:column;gap:4px;font-size:12.5px;align-items:center}
-.top nav .nrow{display:flex;gap:16px;align-items:center;justify-content:center}
-.top nav .nrow .cta{padding:6px 16px}
-.top nav a{padding:2px 2px}
+.top nav{margin-left:auto;flex:1;display:flex;flex-direction:column;gap:7px;align-items:stretch;padding:0 14px;min-width:0}
+.top nav .nrow{display:flex;align-items:center;justify-content:center}
+.top nav .nrow.r1{gap:26px;font-size:14px}
+.top nav .nrow.r1 a{font-weight:700;letter-spacing:.4px;padding:2px 2px}
+.top nav .nrow.r2{gap:14px}
+.top nav .bpat{background:var(--verde);color:var(--navy)!important;border:1px solid #fff;border-radius:9px;font-weight:800;font-size:12.5px;padding:6px 18px}
+.top nav .bpat:hover{transform:translateY(-2px)}
 .top nav a{color:var(--txt);text-decoration:none;font-weight:600;position:relative;padding:6px 2px;transition:color .25s,transform .25s;display:inline-block;white-space:nowrap}
 .top nav a:not(.cta)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--verde);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
 .top nav a:not(.cta):hover{color:#fff;transform:translateY(-2px)}
@@ -33,8 +36,8 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .top .lgadm .lgdiv{width:1.5px;height:40px;background:rgba(255,255,255,.45)}
 .top .lgadm img{height:38px}
 @media(max-width:1180px){.top .lgadm{display:none!important}}
-.top .cta{background:var(--verde);color:var(--navy)!important;padding:9px 18px;border-radius:9px;font-weight:800;white-space:nowrap}
-@media(max-width:760px){.top nav a:not(.cta){display:none}
+.top .cta{background:transparent;color:var(--verde)!important;border:1px solid #fff;padding:6px 18px;border-radius:9px;font-weight:800;font-size:12.5px;white-space:nowrap}
+@media(max-width:760px){.top nav .nrow.r1{display:none}
 .top .t{white-space:normal;font-size:11.5px}
 .top .wrap{height:64px}
 .top img.crestt{height:42px}}
@@ -164,15 +167,15 @@ footer .t b{color:#fff}
   <img class="crestt" src="assets/distintivo.png" alt="GCM">
   <div class="t">I CORRIDA DA GUARDA MUNICIPAL<small>MARINGÁ · PARANÁ · 30/08/2026</small></div>
   <nav>
-    <div class="nrow">
+    <div class="nrow r1">
       <a href="#historia">Prova</a><a href="#midia">Mídia</a>
       <a href="#modalidades">Modalidades</a>
       <a href="#kit">Kit</a>
       <a href="#percursos">Regulamento</a>
-    </div>
-    <div class="nrow">
       <a href="#local">Largada</a>
-      <a href="#patrocinio" style="color:#8CC63F;font-weight:800">Quero patrocinar</a>
+    </div>
+    <div class="nrow r2">
+      <a class="bpat" href="#patrocinio">Quero patrocinar</a>
       <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">Inscreva-se</a>
     </div>
   </nav>
