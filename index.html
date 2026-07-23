@@ -63,7 +63,7 @@ details.cidlist .scroll{max-height:260px;overflow:auto;margin-top:8px;border:1px
 .mapctl button{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:#2A2C46;color:#fff;font-size:16px;font-weight:700;cursor:pointer}
 .mapctl button:hover{background:var(--verde);color:#2A2C46}
 #mapaL{position:absolute;inset:0;border-radius:10px;display:none}
-.leaflet-container{background:#1c1e33}
+.leaflet-container{background:#e8e6e1}
 </style>
 </head>
 <body>
@@ -739,14 +739,17 @@ if(!cid.length){
     document.getElementById('mapaL').style.display='block';
     document.getElementById('mapa').style.display='none';
     document.getElementById('mapctl').style.display='none'; // zoom nativo do Leaflet
-    const map=L.map('mapaL').setView([-23.42,-51.95],8);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-      {attribution:'© OpenStreetMap · © CARTO',maxZoom:18}).addTo(map);
+    const map=L.map('mapaL').setView([-23.45,-51.95],8);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(map);
     geo.slice().sort((a,b)=>b.n-a.n).forEach(p=>{
-      const m=L.circleMarker([p.lat,p.lon],{radius:rOf(p.n),color:'#fff',weight:1,
+      const m=L.circleMarker([p.lat,p.lon],{radius:rOf(p.n),color:'#2A2C46',weight:1.4,
         fillColor:heatColor(p.n),fillOpacity:.82}).addTo(map);
-      m.bindTooltip(`<b>${p.nome} (${p.uf})</b> · ${p.n} inscrito${p.n>1?'s':''}`,{direction:'top'});
-      if(p.n>=30)m.bindTooltip(`${p.nome} · ${p.n}`,{permanent:true,direction:'right',className:'lbl',offset:[8,0]});
+      if(p.n===Math.max(...geo.map(g=>g.n))){
+        m.bindTooltip(`<b>${p.nome}</b> · ${p.n}`,{permanent:true,direction:'right',offset:[10,0]});
+      }else{
+        m.bindTooltip(`<b>${p.nome} (${p.uf})</b> · ${p.n} inscrito${p.n>1?'s':''}`,{direction:'top'});
+      }
     });
     document.getElementById('mapNote').textContent=nota+' Use o scroll ou os botões do mapa para zoom.';
   }
