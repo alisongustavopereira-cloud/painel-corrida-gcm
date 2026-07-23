@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I Corrida da Guarda Municipal de Maringá · 30/08/2026</title>
-<meta name="description" content="I Corrida da Guarda Municipal de Maringá — 30 de agosto de 2026. Corrida 7 km, Caminhada 3 km e Kids 300 m. Inscreva-se!">
+<meta name="description" content="I Corrida da Guarda Municipal de Maringá — 30 de agosto de 2026. Corrida 7 km, Caminhada 3 km e Corrida Kids. Inscreva-se!">
 <link rel="icon" href="assets/distintivo.png">
 
 <style>
@@ -124,6 +124,14 @@ footer .t b{color:#fff}
 .tlitem.hoje::before{background:var(--amarelo)}
 .tlitem h3{font-size:17px;margin:4px 0 6px}
 .tlitem p{color:var(--muted);font-size:14px;line-height:1.9;max-width:700px}
+.docgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:34px}
+.doccard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px}
+.doccard .ic{font-size:36px}
+.doccard h3{font-size:17px}
+.doccard p{color:var(--muted);font-size:13.5px;line-height:1.7;flex:1}
+.doccard .btn{font-size:13.5px;padding:11px 20px;margin-top:8px;text-align:center}
+.doccard.reg{border:2px solid var(--amarelo)}
+.doccard.reg .btn{background:var(--amarelo)}
 </style>
 </head>
 <body>
@@ -135,6 +143,7 @@ footer .t b{color:#fff}
     <a href="#historia">A prova</a>
     <a href="#modalidades">Modalidades</a>
     <a href="#kit">Kit</a>
+    <a href="#percursos">Regulamento</a>
     <a href="#local">Largada</a>
     <a href="#patrocinio" style="color:#8CC63F;font-weight:800">Quero patrocinar</a>
     <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">Inscreva-se</a>
@@ -149,7 +158,7 @@ footer .t b{color:#fff}
 <div class="hero"><div class="hbg" id="hbg1"></div><div class="hbg" id="hbg2"></div><div class="hgrad"></div><div class="wrap">
   <span class="eye">19 ANOS DA GUARDA CIVIL MUNICIPAL</span>
   <h1>I CORRIDA DA<br><b>GUARDA MUNICIPAL</b><br>DE MARINGÁ</h1>
-  <div class="sub"><b>30 de agosto de 2026 · Domingo</b><br>Concentração às 6h00 · <b>Largada às 7h30</b> · Av. Rebouças, 900<br>Corrida 7 km · Caminhada 3 km · Kids 300 m</div>
+  <div class="sub"><b>30 de agosto de 2026 · Domingo</b><br>Concentração às 6h00 · <b>Largada às 7h30</b> · Av. Rebouças, 900<br>Corrida 7 km · Caminhada 3 km · Corrida Kids (100 a 400 m)</div>
   <div>
     <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">INSCREVA-SE AGORA</a>
     <a class="btn ghost" href="#modalidades">Saiba mais</a>
@@ -167,7 +176,7 @@ footer .t b{color:#fff}
 <section id="modalidades"><div class="wrap">
   <div class="sec-eye">MODALIDADES</div>
   <h2>Escolha o seu desafio</h2>
-  <p class="lead">Prova para toda a família: do atleta competitivo à criançada da Guarda Mirim. Inscrições do 1º lote até <b style="color:#fff">17/08/2026</b> (ou enquanto houver vagas).</p>
+  <p class="lead">Prova para toda a família: do atleta competitivo à criançada da Corrida Kids. Inscrições do 1º lote até <b style="color:#fff">17/08/2026</b> (ou enquanto houver vagas).</p>
   <div class="grid3">
     <div class="mcard destacado">
       <span class="tag">COMPETITIVA</span>
@@ -183,15 +192,44 @@ footer .t b{color:#fff}
       <div class="preco"><b>R$ 39,90</b> + <span class="leite">1 litro de leite</span></div>
     </div>
     <div class="mcard">
-      <div class="km">300 m</div>
-      <h3>Corrida Kids · Guarda Mirim</h3>
+      <div class="km">Kids</div>
+      <h3>Corrida Kids</h3>
       <p>Crianças e adolescentes na pista, com toda a segurança da GCM e medalha para cada pequeno atleta.</p>
+      <p style="margin-top:10px">
+        <b style="color:#fff">Sub 7</b> · 100 m &nbsp;&nbsp; <b style="color:#fff">Sub 9</b> · 150 m<br>
+        <b style="color:#fff">Sub 11</b> · 200 m &nbsp;&nbsp; <b style="color:#fff">Sub 14</b> · 400 m
+      </p>
       <div class="preco"><b>Gratuita</b> — apenas <span class="leite">1 litro de leite</span></div>
     </div>
   </div>
 </div></section>
 
 
+
+<section id="percursos" style="padding-top:0"><div class="wrap">
+  <div class="sec-eye">PERCURSOS & REGULAMENTO</div>
+  <h2>Conheça o caminho antes da largada</h2>
+  <div class="docgrid">
+    <div class="doccard">
+      <div class="ic">🏃</div>
+      <h3>Percurso 7 km — Corrida</h3>
+      <p>Trajeto competitivo pelas vias centrais, com cronometragem oficial. Veja o mapa completo com o traçado da prova.</p>
+      <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/anexos/I_Corrida_GCM__Percurso__7_km.pdf" target="_blank" rel="noopener">VER MAPA DO PERCURSO 7 KM</a>
+    </div>
+    <div class="doccard">
+      <div class="ic">🚶</div>
+      <h3>Percurso 3 km — Caminhada</h3>
+      <p>Trajeto participativo para toda a família, no seu ritmo. Confira o mapa oficial do percurso de 3 quilômetros.</p>
+      <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/anexos/I_Corrida_GCM__Percurso__3_km.pdf" target="_blank" rel="noopener">VER MAPA DO PERCURSO 3 KM</a>
+    </div>
+    <div class="doccard reg">
+      <div class="ic">📄</div>
+      <h3>Regulamento oficial</h3>
+      <p>Modalidades, categorias, inscrições, premiação, retirada de kit e todas as regras da prova. Leia antes de se inscrever.</p>
+      <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/anexos/2026_GCM_REGULAMENTO_2026.pdf" target="_blank" rel="noopener">BAIXAR REGULAMENTO (PDF)</a>
+    </div>
+  </div>
+</div></section>
 <section class="hist" id="historia"><div class="wrap">
   <div class="sec-eye">A PROVA</div>
   <h2>Uma história que começou na lei — e termina na linha de chegada</h2>
@@ -209,7 +247,7 @@ footer .t b{color:#fff}
     <div class="tlitem">
       <div class="ano">2026</div>
       <h3>Lei nº 12.163/2026 e Decreto nº 937/2026</h3>
-      <p>A Lei nº 12.163/2026 aprimorou a legislação e instituiu oficialmente a Corrida da Guarda Municipal, regulamentada em seguida pelo Decreto nº 937/2026, na gestão do Secretário de Segurança Municipal, Dr. Luiz Cláudio Alves.</p>
+      <p>A Lei nº 12.163/2026 aprimorou a legislação e instituiu oficialmente a Corrida da Guarda Municipal, regulamentada em seguida pelo Decreto nº 937/2026, assinado pelo Prefeito Silvio Barros, na gestão do Secretário de Segurança Municipal, Dr. Luiz Cláudio Alves.</p>
     </div>
     <div class="tlitem hoje">
       <div class="ano">30/08/2026</div>
@@ -248,7 +286,7 @@ footer .t b{color:#fff}
   <h2>Inscreva-se em 4 passos</h2>
   <div class="passos">
     <div class="passo"><div class="n">1</div><b>Acesse o sistema</b><span>Clique em "Inscreva-se" e preencha seus dados no sistema oficial da Prefeitura.</span></div>
-    <div class="passo"><div class="n">2</div><b>Escolha a modalidade</b><span>7 km, 3 km ou Kids — e o tamanho da sua camiseta.</span></div>
+    <div class="passo"><div class="n">2</div><b>Escolha a modalidade</b><span>7 km, 3 km ou Corrida Kids (Sub 7 a Sub 14) — e o tamanho da sua camiseta.</span></div>
     <div class="passo"><div class="n">3</div><b>Pague em até 3 dias úteis</b><span>A vaga é confirmada após o pagamento da taxa.</span></div>
     <div class="passo"><div class="n">4</div><b>Retire seu kit</b><span>Leve o litro de leite na retirada, na semana do evento. Local e horários serão divulgados.</span></div>
   </div>
