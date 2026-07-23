@@ -1,16 +1,16 @@
 {
- "atualizado_em": "2026-07-23T08:08:12-03:00",
+ "atualizado_em": "2026-07-23T13:08:23-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 23/07/2026)",
- "total": 1227,
- "principal": 1008,
- "menores": 219,
+ "total": 1234,
+ "principal": 1013,
+ "menores": 221,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   835
+   837
   ],
   [
    "Sarandi (PR)",
@@ -49,11 +49,11 @@
    10
   ],
   [
-   "Mandaguaçu (PR)",
-   7
+   "Nova Esperança (PR)",
+   8
   ],
   [
-   "Nova Esperança (PR)",
+   "Mandaguaçu (PR)",
    7
   ],
   [
@@ -90,6 +90,10 @@
   ],
   [
    "Planaltina do Paraná (PR)",
+   3
+  ],
+  [
+   "Toledo (PR)",
    3
   ],
   [
@@ -149,6 +153,10 @@
    1
   ],
   [
+   "Cambé (PR)",
+   1
+  ],
+  [
    "Cruzeiro do Oeste (PR)",
    1
   ],
@@ -185,11 +193,11 @@
    1
   ],
   [
-   "São João do Ivaí (PR)",
+   "São Jorge do Ivaí (PR)",
    1
   ],
   [
-   "São Jorge do Ivaí (PR)",
+   "São João do Ivaí (PR)",
    1
   ],
   [
@@ -409,8 +417,8 @@
   ],
   [
    "2026-07-23",
-   3,
-   0
+   8,
+   2
   ]
  ]
 }
