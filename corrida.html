@@ -17,17 +17,23 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .top{position:sticky;top:0;z-index:50;background:rgba(35,37,64,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:12px;height:78px}
 .top img.crestt{height:52px}
-.top .t{font-size:13px;font-weight:700;line-height:1.2}
+.top .t{font-size:12.5px;font-weight:700;line-height:1.25;white-space:nowrap}
 .top .t small{display:block;font-weight:400;color:var(--muted);font-size:10.5px;letter-spacing:1px}
-.top nav{margin-left:auto;display:flex;gap:18px;font-size:12.5px}
-.top nav a{color:var(--txt);text-decoration:none;font-weight:600;position:relative;padding:6px 2px;transition:color .25s,transform .25s;display:inline-block}
+.top nav{margin-left:auto;display:flex;gap:16px;font-size:12.5px;align-items:center}
+.top nav a{color:var(--txt);text-decoration:none;font-weight:600;position:relative;padding:6px 2px;transition:color .25s,transform .25s;display:inline-block;white-space:nowrap}
 .top nav a:not(.cta)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--verde);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
 .top nav a:not(.cta):hover{color:#fff;transform:translateY(-2px)}
 .top nav a:not(.cta):hover::after{transform:scaleX(1)}
-.top .lgadm{margin-left:16px}
-@media(max-width:900px){.top .lgadm{display:none}}
-.top .cta{background:var(--verde);color:var(--navy)!important;padding:8px 16px;border-radius:9px;font-weight:800}
-@media(max-width:760px){.top nav a:not(.cta){display:none}}
+.top .lgadm{margin-left:16px;display:flex;align-items:center;gap:12px}
+.top .lgadm .lgt{text-align:right;font-size:10px;line-height:1.25;color:#fff;white-space:nowrap}
+.top .lgadm .lgdiv{width:1px;height:32px;background:rgba(255,255,255,.35)}
+.top .lgadm img{height:28px}
+@media(max-width:1180px){.top .lgadm{display:none!important}}
+.top .cta{background:var(--verde);color:var(--navy)!important;padding:9px 18px;border-radius:9px;font-weight:800;white-space:nowrap}
+@media(max-width:760px){.top nav a:not(.cta){display:none}
+.top .t{white-space:normal;font-size:11.5px}
+.top .wrap{height:64px}
+.top img.crestt{height:42px}}
 /* hero */
 .hero{position:relative;min-height:520px;display:flex;align-items:center;background:#232540;overflow:hidden}
 .hbg{position:absolute;inset:0;background-size:cover;background-position:center 35%;opacity:0;transition:opacity 1.6s ease}
@@ -148,10 +154,10 @@ footer .t b{color:#fff}
     <a href="#patrocinio" style="color:#8CC63F;font-weight:800">Quero patrocinar</a>
     <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">Inscreva-se</a>
   </nav>
-  <div class="lgadm" style="display:flex;align-items:center;gap:12px">
-    <div style="text-align:right;font-size:10.5px;line-height:1.25;color:#fff">Secretaria de<br><b>Segurança Municipal</b></div>
-    <div style="width:1px;height:34px;background:rgba(255,255,255,.35)"></div>
-    <img src="assets/logo_prefeitura.png" alt="Prefeitura de Maringá" style="height:30px">
+  <div class="lgadm">
+    <div class="lgt">Secretaria de<br><b>Segurança Municipal</b></div>
+    <div class="lgdiv"></div>
+    <img src="assets/logo_prefeitura.png" alt="Prefeitura de Maringá">
   </div>
 </div></div>
 
