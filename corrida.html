@@ -139,6 +139,20 @@ footer .t b{color:#fff}
 .doccard .btn{font-size:13.5px;padding:11px 20px;margin-top:8px;text-align:center}
 .doccard.reg{border:2px solid var(--amarelo)}
 .doccard.reg .btn{background:var(--amarelo)}
+
+/* midia */
+.mid{background:#232540}
+.midgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:30px}
+.midcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-decoration:none;transition:transform .15s,border-color .15s}
+.midcard:hover{transform:translateY(-3px);border-color:var(--verde)}
+.midcard .veic{display:inline-block;background:rgba(140,198,63,.15);color:var(--verde);font-size:10.5px;font-weight:800;letter-spacing:1.2px;padding:4px 10px;border-radius:10px;margin-bottom:10px;text-transform:uppercase}
+.midcard h3{color:#fff;font-size:14.5px;line-height:1.5;font-weight:600}
+.midcard .ler{display:block;margin-top:12px;color:var(--laranja);font-size:12px;font-weight:700}
+.vidgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:26px}
+.vidcard{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#1c1e33}
+.vidcard iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vidvazio{margin-top:26px;background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:22px;color:var(--muted);font-size:13.5px;text-align:center}
+
 </style>
 </head>
 <body>
@@ -147,7 +161,7 @@ footer .t b{color:#fff}
   <img class="crestt" src="assets/distintivo.png" alt="GCM">
   <div class="t">I CORRIDA DA GUARDA MUNICIPAL<small>MARINGÁ · PARANÁ · 30/08/2026</small></div>
   <nav>
-    <a href="#historia">Prova</a>
+    <a href="#historia">Prova</a><a href="#midia">Mídia</a>
     <a href="#modalidades">Modalidades</a>
     <a href="#kit">Kit</a>
     <a href="#percursos">Regulamento</a>
@@ -322,6 +336,15 @@ footer .t b{color:#fff}
   </div>
 </div></section>
 
+
+<section class="mid" id="midia"><div class="wrap">
+  <div class="sec-eye">NA MÍDIA</div>
+  <h2>A Corrida na Imprensa</h2>
+  <p class="lead">O que os veículos de Maringá e região estão publicando sobre a I Corrida da Guarda Municipal.</p>
+  <div class="midgrid" id="midgrid"></div>
+  <h2 style="margin-top:48px">Vídeos</h2>
+  <div id="vidwrap"></div>
+</div></section>
 <section id="patrocinio" style="padding-top:0"><div class="wrap">
   <div class="patro">
     <div>
@@ -428,6 +451,29 @@ fetch('dados_inscricoes.json').then(r=>r.json()).then(d=>{
   }).catch(()=>{document.getElementById('tempoGrid').innerHTML='<div class="tcard"><div class="dia">Previsão indisponível no momento</div></div>';});
 })();
 
+
+/* na mídia */
+fetch('midia.json').then(r=>r.json()).then(md=>{
+  const g=document.getElementById('midgrid');
+  (md.materias||[]).forEach(x=>{
+    const a=document.createElement('a');a.className='midcard';a.href=x.url;a.target='_blank';a.rel='noopener';
+    a.innerHTML='<span class="veic">'+x.veiculo+'</span><h3>'+x.titulo+'</h3><span class="ler">Ler matéria →</span>';
+    g.appendChild(a);
+  });
+  const vw=document.getElementById('vidwrap');
+  const vids=md.videos||[];
+  if(vids.length){
+    const vg=document.createElement('div');vg.className='vidgrid';
+    vids.forEach(v=>{
+      const d=document.createElement('div');d.className='vidcard';
+      d.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'" title="'+(v.titulo||'Vídeo')+'" allow="accelerometer;encrypted-media;picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+      vg.appendChild(d);
+    });
+    vw.appendChild(vg);
+  }else{
+    vw.innerHTML='<div class="vidvazio">Em breve: vídeos da cobertura oficial e da imprensa sobre a corrida.</div>';
+  }
+}).catch(()=>{});
 </script>
 </body>
 </html>
