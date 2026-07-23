@@ -7,7 +7,13 @@
 }
 </script>
 <html lang="pt-BR">
-<head>
+<head><script>/*versao publica somente leitura*/
+try{Storage.prototype.getItem=function(){return null};Storage.prototype.setItem=function(){};}catch(e){}
+</script>
+<style>#btnClear,#btnAll{display:none!important}
+#list,#gantt{pointer-events:none}
+body::after{content:"Visualização oficial — somente leitura · Status mantido pela coordenação do projeto";display:block;text-align:center;color:#A8AFCB;font-size:11px;padding:10px 0 18px}
+</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Painel de Controle — Edital GCM 2026</title>
