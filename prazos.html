@@ -173,7 +173,7 @@ function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function pd(s){const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
 function today(){const t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate())}
 function days(a,b){return Math.round((b-a)/86400000)}
-function fmt(s){const d=pd(s);return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")}
+function fmt(s){const d=pd(s);const w=["dom","seg","ter","qua","qui","sex","sáb"][d.getDay()];return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" ("+w+")"}
 const START=pd(RANGE_START), END=pd(RANGE_END), TOTAL=days(START,END);
 function off(s){return Math.max(0,Math.min(100, days(START,pd(s))/TOTAL*100))}
 function statusOf(it){
@@ -183,7 +183,7 @@ function statusOf(it){
   if(d<=4) return "apertado";
   return "ok";
 }
-const COLOR={done:"#2563eb",ok:"#16a34a",apertado:"#eab308",vencido:"#dc2626"};
+const COLOR={done:"#4FA3FF",ok:"#8CC63F",apertado:"#FFC94D",vencido:"#FF6B6B"};
 const PILL={done:["p-done","Concluído"],ok:["p-ok","No prazo"],apertado:["p-apertado","Apertado"],vencido:["p-vencido","Vencido"]};
 const BADGE={feito:["b-pronto","concluído"],reassinar:["b-ajustar","reassinar"],hoje:["b-ajustar","publicar 10/07"],externo:["b-externo","PROGE"],certame:["b-auto","etapa do certame"],exec:["b-auto","execução"]};
 
