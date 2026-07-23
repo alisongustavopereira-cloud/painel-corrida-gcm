@@ -1,0 +1,230 @@
+<!doctype html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Gcm Painel Prazos",
+  "schemaVersion": 1,
+  "description": "Painel de controle de prazos e checklist do Chamamento Público de Patrocínio da I Corrida de Rua da Guarda Municipal de Maringá — linha do tempo (Gantt), contadores e checklist com persistência local. Base: publicação 10/07/2026, evento 30/08/2026."
+}
+</script>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel de Controle — Edital GCM 2026</title>
+<style>
+:root{ color-scheme: light; }
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:#1f2937;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.45}
+.wrap{max-width:1000px;margin:0 auto;padding:18px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:#6b7280;font-size:13px;margin-bottom:14px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.counters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.counter{flex:1;min-width:150px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 14px}
+.counter .n{font-size:24px;font-weight:700}
+.counter .l{font-size:12px;color:#6b7280}
+.counter.alert .n{color:#dc2626}
+.counter.warn .n{color:#b45309}
+.progwrap{display:flex;align-items:center;gap:12px}
+.progbar{flex:1;height:14px;background:#eef0f3;border-radius:999px;overflow:hidden}
+.progfill{height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);width:0;transition:width .3s}
+.progpct{font-weight:700;font-size:18px;min-width:52px;text-align:right}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#4b5563;margin-top:4px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.green{background:#16a34a}.yellow{background:#eab308}.red{background:#dc2626}.blue{background:#2563eb}
+h2{font-size:15px;margin:2px 0 12px}
+.gantt-head{display:flex;font-size:11px;color:#9ca3af;margin:0 0 4px}
+.gantt-head .lbl{width:320px;flex:none}
+.gantt-head .scale{flex:1;position:relative;height:16px}
+.gantt-head .scale span{position:absolute;transform:translateX(-50%)}
+.grow{display:flex;align-items:center;margin:3px 0}
+.grow .lbl{width:320px;flex:none;font-size:12.5px;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{flex:1;position:relative;height:22px;background:#f3f4f6;border-radius:5px;overflow:hidden}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:#e5e7eb}
+.bar{position:absolute;top:3px;height:16px;border-radius:4px;min-width:6px;opacity:.92}
+.todayline{position:absolute;top:-2px;bottom:-2px;width:2px;background:#111827;z-index:5}
+.grouphdr{font-size:12px;font-weight:700;color:#374151;margin:14px 0 6px;text-transform:uppercase;letter-spacing:.4px}
+.item{display:flex;align-items:flex-start;gap:10px;padding:9px 8px;border-bottom:1px solid #f0f1f3}
+.item:last-child{border-bottom:none}
+.item input[type=checkbox]{width:18px;height:18px;margin-top:1px;flex:none;cursor:pointer;accent-color:#16a34a}
+.item .main{flex:1;min-width:0}
+.item .name{font-weight:600}
+.item.done .name{text-decoration:line-through;color:#9ca3af}
+.meta{font-size:12px;color:#6b7280;margin-top:2px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{font-size:10.5px;padding:2px 7px;border-radius:999px;font-weight:600;white-space:nowrap}
+.b-pronto{background:#dcfce7;color:#166534}
+.b-ajustar{background:#fef9c3;color:#854d0e}
+.b-criar{background:#f3f4f6;color:#4b5563}
+.b-externo{background:#ede9fe;color:#6d28d9}
+.b-auto{background:#e0f2fe;color:#075985}
+.doc{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6b7280}
+.pill{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:700;white-space:nowrap;flex:none}
+.p-done{background:#dbeafe;color:#1d4ed8}
+.p-ok{background:#dcfce7;color:#15803d}
+.p-apertado{background:#fef9c3;color:#a16207}
+.p-vencido{background:#fee2e2;color:#b91c1c}
+.btns{display:flex;gap:8px;margin-top:6px}
+.btn{font-size:12px;padding:6px 12px;border:1px solid #d1d5db;background:#fff;border-radius:8px;cursor:pointer;color:#374151}
+.btn:hover{background:#f9fafb}
+.foot{font-size:11.5px;color:#9ca3af;margin-top:6px;line-height:1.5}
+.date{font-weight:600;color:#374151}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Painel de Controle — I Corrida de Rua da Guarda Municipal de Maringá</h1>
+  <div class="sub">Chamamento Público de Patrocínio (credenciamento) · Fornecimento direto, sem licitação · Evento: <b>30/08/2026</b> · Base: <b>LC 1.201/2019 + Decreto 937/2026 + Lei 10.671/2018</b> · <b>Publicação 10/07 · recebimento 15 dias corridos (encerra 27/07 14h) · folga ~10 dias.</b></div>
+
+  <div class="counters">
+    <div class="counter"><div class="n" id="cEvento">–</div><div class="l">dias até o evento (30/08)</div></div>
+    <div class="counter" id="cPubBox"><div class="n" id="cPub">–</div><div class="l">dias até a publicação (10/07)</div></div>
+    <div class="counter"><div class="n" id="cDone">–</div><div class="l">itens concluídos</div></div>
+    <div class="counter"><div class="n" id="cPend">–</div><div class="l">itens pendentes</div></div>
+  </div>
+
+  <div class="card">
+    <div class="progwrap">
+      <div class="progbar"><div class="progfill" id="progfill"></div></div>
+      <div class="progpct" id="progpct">0%</div>
+    </div>
+    <div class="legend">
+      <span><span class="dot blue"></span>Concluído</span>
+      <span><span class="dot green"></span>No prazo</span>
+      <span><span class="dot yellow"></span>Apertado (≤4 dias)</span>
+      <span><span class="dot red"></span>Vencido</span>
+      <span style="margin-left:auto">linha preta = hoje</span>
+    </div>
+    <div class="btns">
+      <button class="btn" id="btnClear">Limpar marcações</button>
+      <button class="btn" id="btnAll">Marcar tudo</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Linha do tempo</h2>
+    <div class="gantt-head"><div class="lbl"></div><div class="scale" id="scale"></div></div>
+    <div id="gantt"></div>
+  </div>
+
+  <div class="card">
+    <h2>Checklist de etapas</h2>
+    <div id="list"></div>
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+
+<script>
+const RANGE_START="2026-06-25", RANGE_END="2026-08-30";
+const PUB_LIMIT="2026-07-10", EVENTO="2026-08-30";
+// est: feito=concluído | reassinar | hoje=publicar 10/07 | externo=PROGE | certame | exec
+const ITEMS=[
+ {id:"autuar", g:"Instrução (concluída)", name:"Autuar processo no SEI", doc:"9019724", est:"feito", done:true, start:"2026-06-25", end:"2026-06-26", deadline:"2026-06-26"},
+ {id:"dfd",    g:"Instrução (concluída)", name:"DFD — assinado (Sidnei, 26/06)", doc:"8983261", est:"feito", done:true, start:"2026-06-26", end:"2026-06-26", deadline:"2026-06-26"},
+ {id:"etp",    g:"Instrução (concluída)", name:"ETP — assinado", doc:"9022175", est:"feito", done:true, start:"2026-07-02", end:"2026-07-02", deadline:"2026-07-02"},
+ {id:"anexos", g:"Instrução (concluída)", name:"Anexos I–VI — assinados", doc:"—", est:"feito", done:true, start:"2026-07-02", end:"2026-07-02", deadline:"2026-07-02"},
+ {id:"errata", g:"Instrução (concluída)", name:"Errata do DFD (hidratação 12.300) — assinada", doc:"9034557", est:"feito", done:true, start:"2026-07-03", end:"2026-07-03", deadline:"2026-07-03"},
+ {id:"parecer",g:"Instrução (concluída)", name:"Parecer PROGE nº 976/2026 — favorável", doc:"9060690", est:"externo", done:true, start:"2026-07-07", end:"2026-07-07", deadline:"2026-07-07"},
+ {id:"edital", g:"Instrução (concluída)", name:"Edital — datas atualizadas p/ 10/07→27/07 → REASSINAR", doc:"9023290", est:"reassinar", done:false, start:"2026-07-09", end:"2026-07-09", deadline:"2026-07-10"},
+ {id:"portaria",g:"Instrução (concluída)", name:"Portaria nº 500/2026 (Comissão) — assinada, publica 10/07", doc:"9033227", est:"hoje", done:false, start:"2026-07-10", end:"2026-07-10", deadline:"2026-07-10"},
+
+ {id:"pub",    g:"Certame (10/07 → assinatura)", name:"DLIC + publicação do Edital (Diário, extraordinária)", doc:"—", est:"certame", done:false, start:"2026-07-10", end:"2026-07-10", deadline:"2026-07-10"},
+ {id:"impug",  g:"Certame (10/07 → assinatura)", name:"Impugnação/esclarecimentos (3 d.u.) — até 15/07", doc:"—", est:"certame", done:false, start:"2026-07-11", end:"2026-07-15", deadline:"2026-07-15"},
+ {id:"receb",  g:"Certame (10/07 → assinatura)", name:"Recebimento de propostas (15 dias corridos) — encerra 27/07 14h", doc:"—", est:"certame", done:false, start:"2026-07-11", end:"2026-07-27", deadline:"2026-07-27"},
+ {id:"habil",  g:"Certame (10/07 → assinatura)", name:"Análise/julgamento (27/07 14h30)", doc:"—", est:"certame", done:false, start:"2026-07-27", end:"2026-07-27", deadline:"2026-07-27"},
+ {id:"result", g:"Certame (10/07 → assinatura)", name:"Divulgação do resultado + Diário (28/07)", doc:"—", est:"certame", done:false, start:"2026-07-28", end:"2026-07-28", deadline:"2026-07-28"},
+ {id:"recurso",g:"Certame (10/07 → assinatura)", name:"Anuência/renúncia ao recurso (29/07)", doc:"—", est:"certame", done:false, start:"2026-07-29", end:"2026-07-29", deadline:"2026-07-29"},
+ {id:"homolog",g:"Certame (10/07 → assinatura)", name:"Homologação (30/07)", doc:"—", est:"certame", done:false, start:"2026-07-30", end:"2026-07-30", deadline:"2026-07-30"},
+ {id:"assina", g:"Certame (10/07 → assinatura)", name:"Assinatura dos Termos (até 3 d.u.) — até 04/08", doc:"08_Anexo_V", est:"certame", done:false, start:"2026-07-30", end:"2026-08-04", deadline:"2026-08-04"},
+
+ {id:"prod",   g:"Execução", name:"Produção dos itens (12 dias) → kit pronto ~20/08", doc:"—", est:"exec", done:false, start:"2026-08-05", end:"2026-08-20", deadline:"2026-08-26"},
+ {id:"entrega",g:"Execução", name:"Entrega de kits ao público (sex/sáb)", doc:"—", est:"exec", done:false, start:"2026-08-28", end:"2026-08-29", deadline:"2026-08-29"},
+ {id:"evento", g:"Execução", name:"I Corrida de Rua da Guarda Municipal", doc:"—", est:"exec", done:false, start:"2026-08-30", end:"2026-08-30", deadline:"2026-08-30"},
+];
+const KEY="gcm_checklist_v2";
+let state=JSON.parse(localStorage.getItem(KEY)||"null");
+if(!state){state={};ITEMS.forEach(i=>{if(i.done)state[i.id]=true;});}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function pd(s){const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
+function today(){const t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate())}
+function days(a,b){return Math.round((b-a)/86400000)}
+function fmt(s){const d=pd(s);return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")}
+const START=pd(RANGE_START), END=pd(RANGE_END), TOTAL=days(START,END);
+function off(s){return Math.max(0,Math.min(100, days(START,pd(s))/TOTAL*100))}
+function statusOf(it){
+  if(state[it.id]) return "done";
+  const d=days(today(),pd(it.deadline));
+  if(d<0) return "vencido";
+  if(d<=4) return "apertado";
+  return "ok";
+}
+const COLOR={done:"#2563eb",ok:"#16a34a",apertado:"#eab308",vencido:"#dc2626"};
+const PILL={done:["p-done","Concluído"],ok:["p-ok","No prazo"],apertado:["p-apertado","Apertado"],vencido:["p-vencido","Vencido"]};
+const BADGE={feito:["b-pronto","concluído"],reassinar:["b-ajustar","reassinar"],hoje:["b-ajustar","publicar 10/07"],externo:["b-externo","PROGE"],certame:["b-auto","etapa do certame"],exec:["b-auto","execução"]};
+
+function fmtISO(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function render(){
+  const tdy=today();
+  document.getElementById("cEvento").textContent=Math.max(0,days(tdy,pd(EVENTO)));
+  const dpub=days(tdy,pd(PUB_LIMIT));
+  document.getElementById("cPub").textContent=dpub;
+  const pubBox=document.getElementById("cPubBox");
+  pubBox.className="counter"+(dpub<0?" alert":(dpub<=3?" warn":""));
+  const done=ITEMS.filter(i=>state[i.id]).length;
+  document.getElementById("cDone").textContent=done;
+  document.getElementById("cPend").textContent=ITEMS.length-done;
+  const pct=Math.round(done/ITEMS.length*100);
+  document.getElementById("progfill").style.width=pct+"%";
+  document.getElementById("progpct").textContent=pct+"%";
+
+  const scale=document.getElementById("scale");scale.innerHTML="";
+  [["2026-07-01","1 jul"],["2026-07-15","15 jul"],["2026-08-01","1 ago"],["2026-08-15","15 ago"],["2026-08-30","30 ago"]].forEach(([d,l])=>{
+    const s=document.createElement("span");s.style.left=off(d)+"%";s.textContent=l;scale.appendChild(s);
+  });
+
+  const g=document.getElementById("gantt");g.innerHTML="";
+  let lastG=null;
+  ITEMS.forEach(it=>{
+    if(it.g!==lastG){lastG=it.g;const h=document.createElement("div");h.className="grouphdr";h.textContent=it.g;g.appendChild(h);}
+    const row=document.createElement("div");row.className="grow";
+    const lbl=document.createElement("div");lbl.className="lbl";lbl.textContent=it.name;lbl.title=it.name;
+    const track=document.createElement("div");track.className="track";
+    [25,50,75].forEach(p=>{const gl=document.createElement("div");gl.className="gridline";gl.style.left=p+"%";track.appendChild(gl);});
+    const st=statusOf(it);
+    const bar=document.createElement("div");bar.className="bar";
+    const l=off(it.start), w=Math.max(1.5, off(it.end)-off(it.start));
+    bar.style.left=l+"%";bar.style.width=w+"%";bar.style.background=COLOR[st];
+    bar.title=it.name+" • "+fmt(it.start)+(it.start!==it.end?("–"+fmt(it.end)):"");
+    track.appendChild(bar);
+    const tl=document.createElement("div");tl.className="todayline";tl.style.left=off(fmtISO(tdy))+"%";
+    track.appendChild(tl);
+    row.appendChild(lbl);row.appendChild(track);g.appendChild(row);
+  });
+
+  const list=document.getElementById("list");list.innerHTML="";
+  lastG=null;
+  ITEMS.forEach(it=>{
+    if(it.g!==lastG){lastG=it.g;const h=document.createElement("div");h.className="grouphdr";h.textContent=it.g;list.appendChild(h);}
+    const st=statusOf(it);
+    const row=document.createElement("div");row.className="item"+(state[it.id]?" done":"");
+    const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!state[it.id];
+    cb.addEventListener("change",()=>{state[it.id]=cb.checked;save();render();});
+    const main=document.createElement("div");main.className="main";
+    const nm=document.createElement("div");nm.className="name";nm.textContent=it.name;
+    const meta=document.createElement("div");meta.className="meta";
+    const badge=document.createElement("span");badge.className="badge "+BADGE[it.est][0];badge.textContent=BADGE[it.est][1];
+    const dt=document.createElement("span");dt.innerHTML='prazo: <span class="date">'+fmt(it.deadline)+'</span>';
+    meta.appendChild(badge);
+    if(it.doc!=="—"){const dc=document.createElement("span");dc.className="doc";dc.textContent=it.doc;meta.appendChild(dc);}
+    meta.appendChild(dt);
+    main.appendChild(nm);main.appendChild(meta);
+    const pill=document.createElement("span");pill.className="pill "+PILL[st][0];pill.textContent=PILL[st][1];
+    row.appendChild(cb);row.appendChild(main);row.appendChild(pill);list.appendChild(row);
+  });
+  document.getElementById("foot").innerHTML="Publicação 10/07 (sex) · início da contagem 11/07 (sáb) · recebimento 15 dias corridos — 15º dia 25/07 (sáb), encerra 27/07 (seg) às 14h; análise 14h30. Resultado 28/07 → anuência/renúncia 29/07 → homologação 30/07 → assinatura até 04/08 → produção 12 dias (kit ~20/08); kit no órgão até 26/08; evento 30/08. <b>Folga ~10 dias.</b> Os 15 dias são obrigatórios (Parecer PROGE 976/2026, art. 4º da LC 1.201/2019). Base: LC 1.201/2019 + Decreto 937/2026 + Lei 10.671/2018. Marcações salvas neste navegador.";
+}
+document.getElementById("btnClear").addEventListener("click",()=>{state={};save();render();});
+document.getElementById("btnAll").addEventListener("click",()=>{ITEMS.forEach(i=>state[i.id]=true);save();render();});
+render();
+</script>
+</body>
+</html>
