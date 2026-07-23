@@ -46,13 +46,17 @@ body{font-family:Poppins,'Segoe UI',system-ui,sans-serif;background:var(--navy);
 .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
 /* topbar */
 .top{position:sticky;top:0;z-index:50;background:rgba(35,37,64,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:12px;height:62px}
-.top img{height:42px}
+.top .wrap{display:flex;align-items:center;gap:12px;height:78px}
+.top img.crestt{height:52px}
 .top .t{font-size:13px;font-weight:700;line-height:1.2}
 .top .t small{display:block;font-weight:400;color:var(--muted);font-size:10.5px;letter-spacing:1px}
 .top nav{margin-left:auto;display:flex;gap:18px;font-size:12.5px}
-.top nav a{color:var(--txt);text-decoration:none;font-weight:600}
-.top nav a:hover{color:var(--verde)}
+.top nav a{color:var(--txt);text-decoration:none;font-weight:600;position:relative;padding:6px 2px;transition:color .25s,transform .25s;display:inline-block}
+.top nav a:not(.cta)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--verde);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.top nav a:not(.cta):hover{color:#fff;transform:translateY(-2px)}
+.top nav a:not(.cta):hover::after{transform:scaleX(1)}
+.top .lgadm{height:30px;margin-left:16px}
+@media(max-width:900px){.top .lgadm{display:none}}
 .top .cta{background:var(--verde);color:var(--navy)!important;padding:8px 16px;border-radius:9px;font-weight:800}
 @media(max-width:760px){.top nav a:not(.cta){display:none}}
 /* hero */
@@ -127,7 +131,7 @@ h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.5px;margin-bottom:10px}
 /* footer */
 footer{border-top:1px solid var(--line);padding:34px 0 46px;background:#232540}
 footer .wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-footer img{height:56px}
+footer img{flex:none}
 footer .t{font-size:12px;color:var(--muted);line-height:1.7}
 footer .t b{color:#fff}
 .leaflet-container{background:#e8e6e1}
@@ -136,7 +140,7 @@ footer .t b{color:#fff}
 <body>
 
 <div class="top"><div class="wrap">
-  <img src="assets/distintivo.png" alt="GCM">
+  <img class="crestt" src="assets/distintivo.png" alt="GCM">
   <div class="t">I CORRIDA DA GUARDA MUNICIPAL<small>MARINGÁ · PARANÁ · 30/08/2026</small></div>
   <nav>
     <a href="#modalidades">Modalidades</a>
@@ -145,6 +149,7 @@ footer .t b{color:#fff}
     <a href="#patrocinio" style="color:#8CC63F;font-weight:800">Quero patrocinar</a>
     <a class="cta" href="https://sisweb.maringa.pr.gov.br/prova_gcm/mobile_mostra_prova.php" target="_blank" rel="noopener">Inscreva-se</a>
   </nav>
+  <img class="lgadm" src="assets/logo_prefeitura.png" alt="Prefeitura de Maringá">
 </div></div>
 
 <div class="hero"><div class="hbg" id="hbg1"></div><div class="hbg" id="hbg2"></div><div class="hgrad"></div><div class="wrap">
@@ -250,7 +255,9 @@ footer .t b{color:#fff}
 </div></section>
 
 <footer><div class="wrap">
-  <img src="assets/distintivo.png" alt="GCM Maringá">
+  <img src="assets/distintivo.png" alt="GCM Maringá" style="height:56px">
+  <img src="assets/brasao.png" alt="Brasão de Maringá" style="height:56px">
+  <img src="assets/logo_prefeitura.png" alt="Prefeitura de Maringá" style="height:36px">
   <div class="t">
     <b>Prefeitura do Município de Maringá</b> · Secretaria de Segurança Municipal · Guarda Civil Municipal<br>
     Sede do Comando da GCM — Av. Rebouças, 900 · (44) 3221-8668<br>Evento instituído pela Lei Municipal nº 10.671/2018 e regulamentado pelo Decreto Municipal nº 937/2026<br>
