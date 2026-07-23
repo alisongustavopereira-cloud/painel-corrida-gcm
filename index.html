@@ -68,6 +68,10 @@ details.cidlist .scroll{max-height:260px;overflow:auto;margin-top:8px;border:1px
 .crest-r{right:26px}.crest-l{left:26px}
 .mapcard{display:flex;flex-direction:column}
 .mapcard .mapabox{flex:1;height:auto;min-height:330px}
+.cdrow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;position:relative;z-index:5}
+.cdrow div{background:rgba(42,44,70,.8);border:1px solid var(--line);border-radius:11px;padding:8px 0;text-align:center;width:70px}
+.cdrow b{display:block;font-size:22px;letter-spacing:-1px;color:#fff}
+.cdrow span{font-size:9px;letter-spacing:2px;color:var(--muted);font-weight:700}
 </style>
 </head>
 <body>
@@ -78,6 +82,7 @@ details.cidlist .scroll{max-height:260px;overflow:auto;margin-top:8px;border:1px
   <span class="eye">CHAMAMENTO PÚBLICO Nº 001/2026-SSM</span>
   <h1>I Corrida da Guarda Municipal de Maringá</h1>
   <p>Painel de inscrições e oportunidade de patrocínio · Evento em <b>30/08/2026</b> · Av. Rebouças, 900</p>
+  <div class="cdrow" id="cdrow"></div>
   <div class="org"><b>PREFEITURA DE MARINGÁ</b> · SECRETARIA DE SEGURANÇA MUNICIPAL · GUARDA MUNICIPAL</div>
   <div class="upd" id="upd"></div>
 </div>
@@ -826,6 +831,11 @@ if(!cid.length){
     new ResizeObserver(()=>draw()).observe(box);
   }
 }
+(function(){const alvo=new Date('2026-08-30T07:30:00-03:00');
+function tk(){const d=alvo-new Date(),f=n=>String(Math.max(0,n)).padStart(2,'0');
+const el=document.getElementById('cdrow'); if(!el)return;
+el.innerHTML=`<div><b>${f(Math.floor(d/864e5))}</b><span>DIAS</span></div><div><b>${f(Math.floor(d%864e5/36e5))}</b><span>HORAS</span></div><div><b>${f(Math.floor(d%36e5/6e4))}</b><span>MIN</span></div><div><b>${f(Math.floor(d%6e4/1e3))}</b><span>SEG</span></div>`;}
+tk();setInterval(tk,1000);})();
 </script>
 </body>
 </html>
