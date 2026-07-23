@@ -45,10 +45,10 @@ h2{font-size:15px;margin:2px 0 12px;color:#fff}
 .gantt-head .scale span{position:absolute;transform:translateX(-50%)}
 .grow{display:flex;align-items:center;margin:3px 0}
 .grow .lbl{width:320px;flex:none;font-size:12.5px;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.track{flex:1;position:relative;height:22px;background:#F4F5FA;border-radius:5px;overflow:hidden}
-.gridline{position:absolute;top:0;bottom:0;width:1px;background:#C7CCE0}
+.track{flex:1;position:relative;height:22px;background:#464B7C;border-radius:5px;overflow:hidden}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.22)}
 .bar{position:absolute;top:3px;height:16px;border-radius:4px;min-width:6px;opacity:.92}
-.todayline{position:absolute;top:-2px;bottom:-2px;width:2px;background:#1c1e33;z-index:5}
+.todayline{position:absolute;top:-2px;bottom:-2px;width:2px;background:#FFFFFF;z-index:5}
 .grouphdr{font-size:12px;font-weight:700;color:#8CC63F;margin:14px 0 6px;text-transform:uppercase;letter-spacing:.4px}
 .item{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;margin:7px 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:11px}
 .item:hover{background:rgba(255,255,255,.08)}
@@ -118,7 +118,7 @@ h2{font-size:15px;margin:2px 0 12px;color:#fff}
       <span><span class="dot green"></span>No prazo</span>
       <span><span class="dot yellow"></span>Apertado (≤4 dias)</span>
       <span><span class="dot red"></span>Vencido</span>
-      <span style="margin-left:auto">Linha escura = hoje</span>
+      <span style="margin-left:auto">Linha branca = hoje</span>
     </div>
     <div class="btns">
       <button class="btn" id="btnClear">Limpar marcações</button>
