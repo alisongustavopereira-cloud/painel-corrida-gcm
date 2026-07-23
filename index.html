@@ -742,7 +742,7 @@ if(!cid.length){
     document.getElementById('mapaL').style.display='block';
     document.getElementById('mapa').style.display='none';
     document.getElementById('mapctl').style.display='none'; // zoom nativo do Leaflet
-    const map=L.map('mapaL').setView([-23.45,-51.95],8);
+    const map=L.map('mapaL');
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       {attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(map);
     geo.slice().sort((a,b)=>b.n-a.n).forEach(p=>{
@@ -754,7 +754,10 @@ if(!cid.length){
         m.bindTooltip(`<b>${p.nome} (${p.uf})</b> · ${p.n} inscrito${p.n>1?'s':''}`,{direction:'top'});
       }
     });
-    document.getElementById('mapNote').textContent=nota+' Use o scroll ou os botões do mapa para zoom.';
+    const core=geo.filter(p=>p.lat>-24.3&&p.lat<-21.6&&p.lon>-53.6&&p.lon<-50.8);
+    map.fitBounds(L.latLngBounds(core.map(p=>[p.lat,p.lon])).pad(0.10));
+    setTimeout(()=>{map.invalidateSize();map.fitBounds(L.latLngBounds(core.map(p=>[p.lat,p.lon])).pad(0.10));},400);
+    document.getElementById('mapNote').textContent=nota+' Enquadrado na região com inscritos; afaste o zoom para ver Curitiba, Foz e demais. Use o scroll ou os botões para zoom.';
   }
 
   function renderCanvas(){
