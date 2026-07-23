@@ -146,7 +146,7 @@ footer .t b{color:#fff}
   <img class="crestt" src="assets/distintivo.png" alt="GCM">
   <div class="t">I CORRIDA DA GUARDA MUNICIPAL<small>MARINGÁ · PARANÁ · 30/08/2026</small></div>
   <nav>
-    <a href="#historia">A prova</a>
+    <a href="#historia">Prova</a>
     <a href="#modalidades">Modalidades</a>
     <a href="#kit">Kit</a>
     <a href="#percursos">Regulamento</a>
@@ -272,22 +272,7 @@ footer .t b{color:#fff}
     <div class="kitem"><div class="ic">⏱️</div><b>Chip de cronometragem</b><span>Modalidade 7 km competitiva</span></div>
   </div>
   <div class="soli">
-    <div class="ic" style="line-height:0"><svg width="74" height="86" viewBox="0 0 74 86" xmlns="http://www.w3.org/2000/svg" aria-label="Caixa de leite">
-  <!-- topo gable -->
-  <polygon points="14,22 37,10 60,22 60,30 14,30" fill="#E9EDF5"/>
-  <polygon points="14,22 37,10 37,18 20,27" fill="#FFFFFF"/>
-  <polygon points="37,10 60,22 54,27 37,18" fill="#D4DAE8"/>
-  <rect x="33" y="8" width="8" height="7" rx="2" fill="#8CC63F"/>
-  <!-- corpo -->
-  <rect x="14" y="28" width="46" height="52" rx="3" fill="#FFFFFF"/>
-  <rect x="14" y="28" width="46" height="52" rx="3" fill="none" stroke="#C7CCE0" stroke-width="1"/>
-  <!-- faixa -->
-  <rect x="14" y="44" width="46" height="16" fill="#2A2C46"/>
-  <text x="37" y="56" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#FFFFFF" letter-spacing="2">LEITE</text>
-  <!-- respingo -->
-  <path d="M30 68 q3 -6 7 0 q4 6 -3.5 6 q-6 0 -3.5 -6" fill="#8CC63F" opacity=".85"/>
-  <circle cx="43" cy="70" r="2.4" fill="#8CC63F" opacity=".6"/>
-</svg></div>
+    <div class="ic" style="line-height:0"><img src="assets/leite.png" alt="Caixa de leite" style="height:96px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))"></div>
     <div>
       <h3>Ação Beneficente</h3>
       <p>Cada inscrição inclui a doação de <b>1 litro de leite</b>, destinado a ações sociais do Município. Correndo ou caminhando, você ajuda quem mais precisa.</p>
@@ -429,7 +414,7 @@ fetch('dados_inscricoes.json').then(r=>r.json()).then(d=>{
          <div class="dia">${prova?'🏁 DIA DA PROVA':DS[dt.getDay()]+' '+String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')}</div>
          <div class="ico">${ICO[d.daily.weather_code[i]]||'🌡️'}</div>
          <div class="tmax">${Math.round(d.daily.temperature_2m_max[i])}°C</div>
-         <div class="tmin">mín ${Math.round(d.daily.temperature_2m_min[i])}°C</div>
+         <div class="tmin">Mín ${Math.round(d.daily.temperature_2m_min[i])}°C</div>
          <div class="chuva">💧 ${d.daily.precipitation_probability_max[i]??0}%</div>
        </div>`);
     });

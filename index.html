@@ -103,7 +103,7 @@ details.cidlist .scroll{max-height:260px;overflow:auto;margin-top:8px;border:1px
 
 <div class="card">
   <h2>Evolução das inscrições</h2>
-  <div class="hint">Barras: inscrições por dia (prova principal + Guarda Mirim). Linha: acumulado.</div>
+  <div class="hint">Barras: inscrições por dia (prova principal + Corrida Kids). Linha: acumulado.</div>
   <div class="toggle" id="tg">
     <button data-n="0" class="on">Todo o período</button>
     <button data-n="14">Últimos 14 dias</button>
@@ -120,7 +120,7 @@ details.cidlist .scroll{max-height:260px;overflow:auto;margin-top:8px;border:1px
   </div>
   <div class="card">
     <h2>Perfil dos inscritos</h2>
-    <div class="hint">Prova principal (7 km / 3 km) × Guarda Mirim (300 m)</div>
+    <div class="hint">Prova principal (7 km / 3 km) × Corrida Kids (100 a 400 m)</div>
     <div class="chartbox sm"><canvas id="cDon"></canvas></div>
   </div>
 </div>
@@ -583,7 +583,7 @@ const pct=(DATA.total/DATA.meta_participantes*100);
 const kpis=[
  ['INSCRITOS','v-verde',fmt(DATA.total),'Kits e camisetas com a sua marca'],
  ['PROVA PRINCIPAL','',fmt(DATA.principal),'7 km e 3 km'],
- ['GUARDA MIRIM','v-laranja',fmt(DATA.menores),'300 m · Famílias no evento'],
+ ['CORRIDA KIDS','v-laranja',fmt(DATA.menores),'100 a 400 m · Famílias no evento'],
  ['RITMO (7 DIAS)','v-amarelo',med7.toFixed(1)+'/dia','Últimos 7 dias: '+fmt(u7)+' inscrições'],
  ['FALTAM','v-coral',dEvento+' dias','Para a largada em 30/08']
 ];
@@ -623,7 +623,7 @@ const mk=(n)=>{
 let v=mk(0);
 const cEvo=new Chart(ctx,{data:{labels:v.labels,datasets:[
  {type:'bar',label:'Prova principal',data:v.p,backgroundColor:VERDE,stack:'s',borderRadius:3},
- {type:'bar',label:'Guarda Mirim',data:v.m,backgroundColor:AMARELO,stack:'s',borderRadius:3},
+ {type:'bar',label:'Corrida Kids',data:v.m,backgroundColor:AMARELO,stack:'s',borderRadius:3},
  {type:'line',label:'Acumulado',data:v.c,yAxisID:'y2',borderColor:LARANJA,backgroundColor:LARANJA,pointRadius:0,borderWidth:2.5,tension:.25}]},
  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
   scales:{x:{stacked:true,grid:{display:false},ticks:{maxRotation:60,autoSkip:true,maxTicksLimit:20}},
@@ -663,13 +663,13 @@ new Chart(document.getElementById('cProj'),{type:'line',data:{labels:projLbl,dat
    tooltip:{callbacks:{label:c=>c.dataset.label+': '+(c.raw==null?'—':fmt(c.raw)+' inscritos')}}}}});
 
 new Chart(document.getElementById('cDon'),{type:'doughnut',
- data:{labels:['Prova principal','Guarda Mirim'],datasets:[{data:[DATA.principal,DATA.menores],backgroundColor:[VERDE,AMARELO],borderColor:CARD,borderWidth:3}]},
+ data:{labels:['Prova principal','Corrida Kids'],datasets:[{data:[DATA.principal,DATA.menores],backgroundColor:[VERDE,AMARELO],borderColor:CARD,borderWidth:3}]},
  options:{responsive:true,maintainAspectRatio:false,cutout:'62%',
   plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11},color:TXT}}}}});
 
 document.getElementById('pitchGrid').innerHTML=[
  ['<b>'+fmt(DATA.total)+' camisetas</b>','Já garantidas com espaço para a logomarca do patrocinador — e crescendo todo dia.'],
- ['<b>'+fmt(DATA.menores)+' crianças</b>','Na Guarda Mirim: cada uma traz a família — público multiplicado na arena.'],
+ ['<b>'+fmt(DATA.menores)+' crianças</b>','Na Corrida Kids: cada uma traz a família — público multiplicado na arena.'],
  ['<b>Mídia contínua</b>','Pórtico de largada, arena, pódio, redes oficiais da GCM — com a <b>Rede Massa (rádio e TV)</b> parceira do evento.'],
  ['<b>Sem repasse de dinheiro</b>','O patrocínio é em bens/serviços, na forma da Lei Municipal nº 10.671/2018 e do Decreto Municipal nº 937/2026 — processo público e transparente.']
 ].map(x=>`<div class="b">${x[0]}${x[1]}</div>`).join('');
