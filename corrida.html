@@ -354,9 +354,9 @@ fetch('dados_inscricoes.json').then(r=>r.json()).then(d=>{
   const l=document.createElement('link');l.rel='stylesheet';l.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';document.head.appendChild(l);
   const s=document.createElement('script');s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
   s.onload=()=>{
-    const map=L.map('mapa').setView([-23.4222,-51.9185],16);
+    const map=L.map('mapa').setView([-23.421000,-51.910247],17);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(map);
-    L.marker([-23.4222,-51.9185]).addTo(map).bindPopup('<b>Largada</b><br>Av. Rebouças, 900<br>30/08 · 7h30').openPopup();
+    L.marker([-23.421000,-51.910247]).addTo(map).bindPopup('<b>Largada</b><br>Av. Rebouças, 900<br>30/08 · 7h30').openPopup();
   };
   document.head.appendChild(s);
 })();
