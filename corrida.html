@@ -116,7 +116,7 @@ footer .t b{color:#fff}
 <div class="hero"><div class="wrap">
   <span class="eye">19 ANOS DA GUARDA CIVIL MUNICIPAL</span>
   <h1>I CORRIDA DA<br><b>GUARDA MUNICIPAL</b><br>DE MARINGÁ</h1>
-  <div class="sub"><b>30 de agosto de 2026 · Domingo · 7h00</b> · Largada na Av. Rebouças, 900<br>
+  <div class="sub"><b>30 de agosto de 2026 · Domingo · 7h30</b> · Largada na Av. Rebouças, 900<br>
   Corrida 7 km · Caminhada 3 km · Kids 300 m</div>
   <div>
     <a class="btn" href="https://sisweb.maringa.pr.gov.br/prova_gcm/" target="_blank" rel="noopener">INSCREVA-SE AGORA</a>
@@ -180,7 +180,7 @@ footer .t b{color:#fff}
 <section id="local"><div class="wrap">
   <div class="sec-eye">LARGADA E PERCURSO</div>
   <h2>Av. Rebouças, 900 — em frente à sede da GCM</h2>
-  <p class="lead">Concentração a partir das 6h15 · Largada às 7h00 em ponto. Percursos pelas vias centrais com segurança total da Guarda Civil Municipal.</p>
+  <p class="lead">Concentração a partir das 6h00 · Largada às 7h30 em ponto. Percursos pelas vias centrais com segurança total da Guarda Municipal, em conjunto com a Semob.</p>
   <div id="mapa"></div>
 </div></section>
 
@@ -227,7 +227,7 @@ footer .t b{color:#fff}
 
 <script>
 // countdown
-const alvo=new Date('2026-08-30T07:00:00-03:00');
+const alvo=new Date('2026-08-30T07:30:00-03:00');
 function tick(){
   const d=alvo-new Date();
   const f=n=>String(Math.max(0,n)).padStart(2,'0');
@@ -250,7 +250,7 @@ fetch('dados_inscricoes.json').then(r=>r.json()).then(d=>{
   s.onload=()=>{
     const map=L.map('mapa').setView([-23.4273,-51.9375],15);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(map);
-    L.marker([-23.4273,-51.9375]).addTo(map).bindPopup('<b>Largada</b><br>Av. Rebouças, 900<br>30/08 · 7h00').openPopup();
+    L.marker([-23.4273,-51.9375]).addTo(map).bindPopup('<b>Largada</b><br>Av. Rebouças, 900<br>30/08 · 7h30').openPopup();
   };
   document.head.appendChild(s);
 })();
