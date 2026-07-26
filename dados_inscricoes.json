@@ -1,28 +1,28 @@
 {
- "atualizado_em": "2026-07-25T19:08:35-03:00",
- "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 25/07/2026)",
- "total": 1247,
- "principal": 1024,
- "menores": 223,
+ "atualizado_em": "2026-07-26T08:07:45-03:00",
+ "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 26/07/2026)",
+ "total": 1253,
+ "principal": 1029,
+ "menores": 224,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   847
+   849
   ],
   [
    "Sarandi (PR)",
-   138
+   139
   ],
   [
    "Paiçandu (PR)",
-   47
+   49
   ],
   [
    "Doutor Camargo (PR)",
-   34
+   35
   ],
   [
    "Marialva (PR)",
@@ -427,8 +427,8 @@
   ],
   [
    "2026-07-25",
-   1,
-   0
+   6,
+   1
   ]
  ]
 }
