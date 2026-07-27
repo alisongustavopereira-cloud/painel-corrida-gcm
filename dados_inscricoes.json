@@ -1,16 +1,16 @@
 {
- "atualizado_em": "2026-07-27T08:07:47-03:00",
+ "atualizado_em": "2026-07-27T13:22:03-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 27/07/2026)",
- "total": 1279,
- "principal": 1045,
- "menores": 234,
+ "total": 1288,
+ "principal": 1053,
+ "menores": 235,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   866
+   872
   ],
   [
    "Sarandi (PR)",
@@ -26,7 +26,7 @@
   ],
   [
    "Marialva (PR)",
-   25
+   26
   ],
   [
    "Apucarana (PR)",
@@ -49,12 +49,12 @@
    10
   ],
   [
-   "Nova Esperança (PR)",
+   "Floresta (PR)",
    8
   ],
   [
-   "Floresta (PR)",
-   7
+   "Nova Esperança (PR)",
+   8
   ],
   [
    "Mandaguaçu (PR)",
@@ -81,15 +81,15 @@
    4
   ],
   [
+   "Planaltina do Paraná (PR)",
+   4
+  ],
+  [
    "Cruzeiro do Sul (PR)",
    3
   ],
   [
    "Paraíso do Norte (PR)",
-   3
-  ],
-  [
-   "Planaltina do Paraná (PR)",
    3
   ],
   [
@@ -437,8 +437,8 @@
   ],
   [
    "2026-07-27",
-   2,
-   0
+   10,
+   1
   ]
  ]
 }
