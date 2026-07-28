@@ -64,7 +64,14 @@
    "65 a 69 anos",
    "70 anos ou mais"
   ],
-  "kids_trofeu": false,
-  "fonte": "Regulamento GCM 2026, art. 9"
+  "kids_trofeu": true,
+  "fonte": "Regulamento GCM 2026, art. 9",
+  "kids_top": 3,
+  "kids_categorias": [
+   "Sub 07",
+   "Sub 09",
+   "Sub 11",
+   "Sub 14"
+  ]
  }
 }
