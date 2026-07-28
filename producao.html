@@ -82,32 +82,26 @@ td.prod{text-align:right;font-weight:800;color:var(--amarelo);font-variant-numer
 
 <div class="alert">
   <div class="ic">🏭</div>
-  <div><b>PRODUÇÃO IMEDIATA.</b> <b>Confirmado Agora</b> já pode entrar em produção. A coluna <b>A Produzir</b> traz a projeção final por tamanho já com margem de segurança. Atualização automática às <b>08h00, 13h00 e 17h00</b>.</div>
+  <div><b>PRODUÇÃO IMEDIATA.</b> Produza já o <b>Confirmado</b> (tamanho definido) e adiante o <b>A produzir a mais</b>, que distribui o restante da meta pelo % atual de cada tamanho — sem esperar as inscrições que faltam confirmar. Atualização automática às <b>08h00, 13h00 e 17h00</b>.</div>
   <button class="printbtn" onclick="window.print()">🖨️ Imprimir / PDF</button>
 </div>
 
 <div class="kpis" id="kpis"></div>
 
 <div class="card">
-  <h2>Cenário da projeção</h2>
-  <div class="hint">A coluna <b>A Produzir</b> aplica a distribuição atual de tamanhos ao total selecionado e soma a margem de segurança. Escolha a base:</div>
-  <div class="toggle" id="tg">
-    <button data-alvo="2130" class="on">Contratado — 2.130 camisetas</button>
-    <button data-alvo="2500">Meta oficial — 2.500 participantes</button>
-    <button data-alvo="confirmado">Só confirmado agora</button>
-  </div>
-  <div class="hint" id="margemInfo"></div>
+  <h2>Plano de produção</h2>
+  <div class="hint" id="planoInfo"></div>
 </div>
 
 <div class="row2">
   <div class="card">
     <h2>Adulto <span class="chip" id="chipA"></span></h2>
-    <div class="hint">Qtd atual · % · projeção · <b>A produzir</b> (c/ margem). M/F = estimativa pela proporção de inscritos.</div>
+    <div class="hint">Confirmado · % · M/F (est.) · <b>A produzir a mais</b> · <b>Total a produzir</b></div>
     <table id="tblA"></table>
   </div>
   <div class="card">
     <h2>Infantil · Corrida Kids <span class="chip" id="chipK"></span></h2>
-    <div class="hint">Qtd atual · % · projeção · <b>A produzir</b> (c/ margem).</div>
+    <div class="hint">Confirmado · % · <b>A produzir a mais</b> · <b>Total a produzir</b></div>
     <table id="tblK"></table>
   </div>
 </div>
@@ -148,25 +142,90 @@ const DATA = {
  "atualizado_em": "2026-07-28T10:15:39-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)",
  "meta_participantes": 2500,
- "contratado_camisetas": 2130,
- "margem_producao_pct": 4,
  "trofeus_por_categoria": 3,
  "total_inscritos": 1304,
  "adultos_inscritos": 1067,
  "menores_inscritos": 237,
- "genero": {"adulto_masc": 531, "adulto_fem": 536, "infantil_masc": 130, "infantil_fem": 107},
- "adulto_homologado": {"PP":55,"P":99,"M":118,"G":121,"GG":47,"EXG":9,"EXGG":4},
- "adulto_isento_nao_homologado": {"PP":16,"P":27,"M":49,"G":37,"GG":16,"EXG":3,"EXGG":0},
- "infantil": {"PP":105,"P":33,"M":9,"G":3,"GG":2},
- "categorias_corrida": ["A 20","A 25","A 30","A 35","M 40 / F 40","M 45 / F 45","M 50 / F 50","M 55 / F 55","M 60 / F 60","M 65 / F 65","M 70+ / F 70+","Sub 18","Sub 20"],
- "categorias_caminhada": ["A 20","A 25","A 30","A 35","M 40 / F 40","M 45 / F 45","M 50 / F 50","M 55 / F 55","M 60 / F 60","M 65 / F 65","M 70+ / F 70+","Sub 18","Sub 20"],
- "categorias_kids": ["Sub 07","Sub 09","Sub 11","Sub 14"]
-}
-;
+ "genero": {
+  "adulto_masc": 531,
+  "adulto_fem": 536,
+  "infantil_masc": 130,
+  "infantil_fem": 107
+ },
+ "adulto_homologado": {
+  "PP": 55,
+  "P": 99,
+  "M": 118,
+  "G": 121,
+  "GG": 47,
+  "EXG": 9,
+  "EXGG": 4
+ },
+ "adulto_isento_nao_homologado": {
+  "PP": 16,
+  "P": 27,
+  "M": 49,
+  "G": 37,
+  "GG": 16,
+  "EXG": 3,
+  "EXGG": 0
+ },
+ "infantil": {
+  "PP": 105,
+  "P": 33,
+  "M": 9,
+  "G": 3,
+  "GG": 2
+ },
+ "categorias_corrida": [
+  "A 20",
+  "A 25",
+  "A 30",
+  "A 35",
+  "M 40 / F 40",
+  "M 45 / F 45",
+  "M 50 / F 50",
+  "M 55 / F 55",
+  "M 60 / F 60",
+  "M 65 / F 65",
+  "M 70+ / F 70+",
+  "Sub 18",
+  "Sub 20"
+ ],
+ "categorias_caminhada": [
+  "A 20",
+  "A 25",
+  "A 30",
+  "A 35",
+  "M 40 / F 40",
+  "M 45 / F 45",
+  "M 50 / F 50",
+  "M 55 / F 55",
+  "M 60 / F 60",
+  "M 65 / F 65",
+  "M 70+ / F 70+",
+  "Sub 18",
+  "Sub 20"
+ ],
+ "categorias_kids": [
+  "Sub 07",
+  "Sub 09",
+  "Sub 11",
+  "Sub 14"
+ ],
+ "plano_producao": {
+  "empenhado_total": 2134,
+  "reserva_sesp": 300,
+  "staff": 200
+ }
+};
 const SZ_A=["PP","P","M","G","GG","EXG","EXGG"];
 const SZ_K=["PP","P","M","G","GG"];
-const MARGEM=(DATA.margem_producao_pct||0)/100;
 const TPC=DATA.trofeus_por_categoria||3;
+const PL=DATA.plano_producao||{empenhado_total:2134,reserva_sesp:300,staff:200};
+const EMP=PL.empenhado_total||0, RES=PL.reserva_sesp||0, STAFF=PL.staff||0;
+const PROD=EMP-RES;            // a produzir agora
+const ATLETAS=PROD-STAFF;      // camisetas dos atletas (adulto+infantil)
 const nf=n=>Math.round(n).toLocaleString('pt-BR');
 const pct=(v,t)=>t?(v/t*100):0;
 
@@ -175,65 +234,53 @@ const kidsNow={}; SZ_K.forEach(s=>kidsNow[s]=DATA.infantil[s]||0);
 const adultTot=SZ_A.reduce((a,s)=>a+adultNow[s],0);
 const kidsTot=SZ_K.reduce((a,s)=>a+kidsNow[s],0);
 const confTot=adultTot+kidsTot;
-const shareA=DATA.adultos_inscritos/DATA.total_inscritos;
-const shareK=DATA.menores_inscritos/DATA.total_inscritos;
-// proporção M/F (estimativa)
+// atletas divididos adulto/infantil pela proporção do confirmado; staff soma no adulto
+const kidsPool=confTot?Math.round(ATLETAS*kidsTot/confTot):0;
+const adultAtletas=ATLETAS-kidsPool;
+const adultPool=adultAtletas+STAFF;
 const g=DATA.genero||{};
-const mfA={m:g.adulto_masc/(g.adulto_masc+g.adulto_fem||1), f:g.adulto_fem/(g.adulto_masc+g.adulto_fem||1)};
-const mfK={m:g.infantil_masc/(g.infantil_masc+g.infantil_fem||1), f:g.infantil_fem/(g.infantil_masc+g.infantil_fem||1)};
+const mfA=g.adulto_masc/((g.adulto_masc+g.adulto_fem)||1);
+const mfK=g.infantil_masc/((g.infantil_masc+g.infantil_fem)||1);
 
-function cenario(alvo){
-  if(alvo==='confirmado') return {adult:{...adultNow}, kids:{...kidsNow}, aT:adultTot, kT:kidsTot, proj:false, alvo};
-  const T=alvo==='2130'?DATA.contratado_camisetas:DATA.meta_participantes;
-  const aAlvo=Math.round(T*shareA), kAlvo=Math.round(T*shareK);
-  const adult={}, kids={};
-  SZ_A.forEach(s=>adult[s]=adultTot?Math.round(adultNow[s]/adultTot*aAlvo):0);
-  SZ_K.forEach(s=>kids[s]=kidsTot?Math.round(kidsNow[s]/kidsTot*kAlvo):0);
-  return {adult, kids, aT:Object.values(adult).reduce((a,b)=>a+b,0), kT:Object.values(kids).reduce((a,b)=>a+b,0), proj:true, alvo};
-}
-let chart, alvoAtual='2130';
-const prod=v=>Math.ceil(v*(1+MARGEM));
-
-function tabela(el, sizes, obj, tot, cor, mf){
-  const max=Math.max(...sizes.map(s=>obj[s]||0),1);
-  let totProd=0;
-  let h='<tr><th>Tam.</th><th class="num">Qtd</th><th class="num">%</th><th class="num">M/F est.</th><th style="width:22%">Prop.</th><th class="num">A produzir</th></tr>';
+function tabela(el, sizes, now, tot, pool, cor, mfm, showMF){
+  const max=Math.max(...sizes.map(s=>now[s]||0),1);
+  let sumConf=0,sumMais=0,sumTot=0;
+  let h='<tr><th>Tam.</th><th class="num">Confirm.</th><th class="num">%</th>';
+  if(showMF) h+='<th class="num">M/F est.</th>';
+  h+='<th style="width:16%">Prop.</th><th class="num">A + mais</th><th class="num">Total</th></tr>';
   sizes.forEach(s=>{
-    const v=obj[s]||0, p=pct(v,tot), pr=prod(v); totProd+=pr;
-    const m=Math.round(v*mf.m), f=v-m;
-    h+='<tr><td class="sz">'+s+'</td><td class="num">'+nf(v)+'</td><td class="num">'+p.toFixed(1)+'%</td>'+
-       '<td class="num mf">'+m+' / '+f+'</td>'+
-       '<td><span style="display:inline-block;height:9px;border-radius:5px;background:'+cor+';width:'+(v/max*100).toFixed(0)+'%"></span></td>'+
-       '<td class="prod">'+nf(pr)+'</td></tr>';
+    const c=now[s]||0, p=pct(c,tot);
+    const total=tot?Math.round(pool*c/tot):0;
+    const mais=Math.max(0,total-c);
+    sumConf+=c; sumMais+=mais; sumTot+=total;
+    const m=Math.round(total*mfm), f=total-m;
+    h+='<tr><td class="sz">'+s+'</td><td class="num">'+nf(c)+'</td><td class="num">'+p.toFixed(1)+'%</td>';
+    if(showMF) h+='<td class="num mf">'+m+' / '+f+'</td>';
+    h+='<td><span style="display:inline-block;height:9px;border-radius:5px;background:'+cor+';width:'+(c/max*100).toFixed(0)+'%"></span></td>'+
+       '<td class="num" style="color:var(--laranja);font-weight:700">'+nf(mais)+'</td>'+
+       '<td class="prod">'+nf(total)+'</td></tr>';
   });
-  h+='<tr class="tot"><td>TOTAL</td><td class="num">'+nf(tot)+'</td><td class="num">100%</td><td class="num mf"></td><td></td><td class="prod">'+nf(totProd)+'</td></tr>';
+  h+='<tr class="tot"><td>TOTAL</td><td class="num">'+nf(sumConf)+'</td><td class="num">100%</td>';
+  if(showMF) h+='<td class="num"></td>';
+  h+='<td></td><td class="num" style="color:var(--laranja)">'+nf(sumMais)+'</td><td class="prod">'+nf(sumTot)+'</td></tr>';
   el.innerHTML=h;
-  return totProd;
+  return {conf:sumConf, mais:sumMais, tot:sumTot};
 }
-function kpis(cen, prodA, prodK){
-  const gEl=document.getElementById('kpis');
-  const totalProd=prodA+prodK;
+function kpis(rA,rK){
   const rows=[
-    [nf(confTot), 'CONFIRMADAS AGORA', 'com tamanho definido', 'var(--verde)'],
-    [nf(totalProd), 'A PRODUZIR (TOTAL)', 'c/ margem '+(DATA.margem_producao_pct||0)+'%', 'var(--amarelo)'],
-    [nf(prodA), 'A PRODUZIR ADULTO', 'PP a EXGG', '#fff'],
-    [nf(prodK), 'A PRODUZIR INFANTIL', 'Corrida Kids', 'var(--laranja)'],
-    [nf(DATA.total_inscritos), 'INSCRITOS', 'base do cálculo', 'var(--txt)']
+    [nf(confTot), 'CONFIRMADO', 'tamanho definido — produzir já', 'var(--verde)'],
+    [nf(PROD), 'A PRODUZIR (PROVA)', nf(EMP)+' pagas − '+nf(RES)+' reserva SESP', 'var(--amarelo)'],
+    [nf(rA.mais+rK.mais), 'A PRODUZIR A MAIS', 'distribuído pelo % atual', 'var(--laranja)'],
+    [nf(rA.tot), 'TOTAL ADULTO', 'atletas + '+nf(STAFF)+' staff', '#fff'],
+    [nf(rK.tot), 'TOTAL INFANTIL', 'Corrida Kids', 'var(--laranja)']
   ];
-  gEl.innerHTML=rows.map(r=>'<div class="kpi"><div class="l">'+r[1]+'</div><div class="n" style="color:'+r[3]+'">'+r[0]+'</div><div class="s">'+r[2]+'</div></div>').join('');
+  document.getElementById('kpis').innerHTML=rows.map(r=>'<div class="kpi"><div class="l">'+r[1]+'</div><div class="n" style="color:'+r[3]+'">'+r[0]+'</div><div class="s">'+r[2]+'</div></div>').join('');
 }
-function medalhasTrofeus(cen){
-  // medalhas: total de participantes projetado (adulto + infantil) SEM margem de camiseta; usa alvo
-  let totalPart;
-  if(cen.alvo==='confirmado') totalPart=DATA.total_inscritos;
-  else totalPart=(cen.alvo==='2130')?DATA.contratado_camisetas:DATA.meta_participantes;
-  const medProd=Math.ceil(totalPart*(1+MARGEM));
-  document.getElementById('medNum').textContent=nf(medProd);
-  document.getElementById('medSub').innerHTML='= participantes projetados ('+nf(totalPart)+') + margem '+(DATA.margem_producao_pct||0)+'%. Toda inscrição (corrida, caminhada e kids) recebe 1 medalha.';
-  // troféus: categorias × 2 sexos × TPC
+function medalhasTrofeus(){
+  document.getElementById('medNum').textContent=nf(ATLETAS);
+  document.getElementById('medSub').innerHTML='= atletas da prova ('+nf(ATLETAS)+'). Staff e reserva SESP não recebem medalha.';
   const nC=(DATA.categorias_corrida||[]).length, nW=(DATA.categorias_caminhada||[]).length, nK=(DATA.categorias_kids||[]).length;
-  const troC=nC*2*TPC, troW=nW*2*TPC, troK=nK*2*TPC;
-  const troTot=troC+troW+troK;
+  const troC=nC*2*TPC, troW=nW*2*TPC, troK=nK*2*TPC, troTot=troC+troW+troK;
   document.getElementById('tpc').textContent=TPC;
   document.getElementById('troNum').textContent=nf(troTot);
   document.getElementById('troSub').innerHTML='('+nC+' cat. corrida + '+nW+' cat. caminhada + '+nK+' cat. kids) × 2 sexos × '+TPC+' premiados.';
@@ -244,34 +291,26 @@ function medalhasTrofeus(cen){
   document.getElementById('tblTro').innerHTML=h;
 }
 function desenha(){
-  const cen=cenario(alvoAtual);
-  document.getElementById('chipA').textContent=cen.proj?'projeção':'atual';
-  document.getElementById('chipK').textContent=cen.proj?'projeção':'atual';
-  const prodA=tabela(document.getElementById('tblA'), SZ_A, cen.adult, cen.aT, 'var(--verde)', mfA);
-  const prodK=tabela(document.getElementById('tblK'), SZ_K, cen.kids, cen.kT, 'var(--laranja)', mfK);
-  kpis(cen, prodA, prodK);
-  medalhasTrofeus(cen);
-  document.getElementById('margemInfo').innerHTML='Margem de segurança aplicada na coluna <b>A Produzir</b>: <b>'+(DATA.margem_producao_pct||0)+'%</b>. Ajustável no arquivo tamanhos_camisetas.json (campo margem_producao_pct).';
-  document.getElementById('chartHint').textContent = cen.proj
-    ? 'Projeção: distribuição atual aplicada ao total selecionado.'
-    : 'Cenário atual: tamanhos já confirmados no sistema.';
+  document.getElementById('chipA').textContent='meta '+nf(adultPool);
+  document.getElementById('chipK').textContent='meta '+nf(kidsPool);
+  const rA=tabela(document.getElementById('tblA'), SZ_A, adultNow, adultTot, adultPool, 'var(--verde)', mfA, true);
+  const rK=tabela(document.getElementById('tblK'), SZ_K, kidsNow, kidsTot, kidsPool, 'var(--laranja)', mfK, false);
+  kpis(rA,rK);
+  medalhasTrofeus();
+  document.getElementById('planoInfo').innerHTML='<b>'+nf(EMP)+'</b> camisetas pagas/empenhadas (teto de gasto) − <b>'+nf(RES)+'</b> reserva SESP = <b>'+nf(PROD)+'</b> a produzir para a prova. Deste total: <b>'+nf(STAFF)+'</b> staff (distribuído na proporção adulto) + <b>'+nf(ATLETAS)+'</b> atletas (distribuído por tamanho pelo % confirmado). Valores editáveis no arquivo tamanhos_camisetas.json.';
+  document.getElementById('chartHint').textContent='Confirmado por tamanho (base da distribuição).';
   const labels=SZ_A;
-  const dA=labels.map(s=>cen.adult[s]||0);
-  const dK=labels.map(s=>cen.kids[s]||0);
-  if(chart)chart.destroy();
-  chart=new Chart(document.getElementById('cBar'),{type:'bar',data:{labels,datasets:[
-    {label:'Adulto',data:dA,backgroundColor:'#8CC63F'},
-    {label:'Infantil',data:dK,backgroundColor:'#F4A24A'}]},
+  const dA=labels.map(s=>adultNow[s]||0), dK=labels.map(s=>kidsNow[s]||0);
+  if(window._chart)window._chart.destroy();
+  window._chart=new Chart(document.getElementById('cBar'),{type:'bar',data:{labels,datasets:[
+    {label:'Adulto (confirmado)',data:dA,backgroundColor:'#8CC63F'},
+    {label:'Infantil (confirmado)',data:dK,backgroundColor:'#F4A24A'}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#C9CEE4'}}},
     scales:{x:{ticks:{color:'#C9CEE4'},grid:{color:'rgba(255,255,255,.06)'}},
     y:{ticks:{color:'#A8AFCB'},grid:{color:'rgba(255,255,255,.06)'}}}}});
 }
 document.getElementById('upd').textContent='Atualizado em '+new Date(DATA.atualizado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-document.getElementById('foot').innerHTML='Fonte: '+DATA.fonte+'. Coluna "A produzir" = projeção × (1 + margem). M/F por tamanho é estimativa pela proporção geral de inscritos por sexo (o sistema não cruza tamanho × sexo). Secretaria de Segurança Municipal · Guarda Municipal de Maringá.';
-document.querySelectorAll('#tg button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#tg button').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on'); alvoAtual=b.dataset.alvo; desenha();
-});
+document.getElementById('foot').innerHTML='Fonte: '+DATA.fonte+'. "A produzir a mais" distribui o restante da meta pelo % de tamanhos confirmados. M/F por tamanho é estimativa pela proporção geral por sexo (o sistema não cruza tamanho × sexo). Secretaria de Segurança Municipal · Guarda Municipal de Maringá.';
 desenha();
 </script>
 </body></html>
