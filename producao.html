@@ -235,7 +235,7 @@ const adultTot=SZ_A.reduce((a,s)=>a+adultNow[s],0);
 const kidsTot=SZ_K.reduce((a,s)=>a+kidsNow[s],0);
 const confTot=adultTot+kidsTot;
 // atletas divididos adulto/infantil pela proporção do confirmado; staff soma no adulto
-const kidsPool=confTot?Math.round(ATLETAS*kidsTot/confTot):0;
+const kidsPool=Math.min(DATA.menores_inscritos||kidsTot, ATLETAS);  // infantil = crianças inscritas (grupo fechado)
 const adultAtletas=ATLETAS-kidsPool;
 const adultPool=adultAtletas+STAFF;
 const g=DATA.genero||{};
@@ -269,10 +269,11 @@ function tabela(el, sizes, now, tot, pool, cor, mfm, showMF){
 function kpis(rA,rK){
   const rows=[
     [nf(confTot), 'CONFIRMADO', 'tamanho definido — produzir já', 'var(--verde)'],
-    [nf(PROD), 'A PRODUZIR (PROVA)', nf(EMP)+' pagas − '+nf(RES)+' reserva SESP', 'var(--amarelo)'],
+    [nf(PROD), 'A PRODUZIR (PROVA)', nf(EMP)+' pagas − '+nf(RES)+' SESP', 'var(--amarelo)'],
     [nf(rA.mais+rK.mais), 'A PRODUZIR A MAIS', 'distribuído pelo % atual', 'var(--laranja)'],
     [nf(rA.tot), 'TOTAL ADULTO', 'atletas + '+nf(STAFF)+' staff', '#fff'],
-    [nf(rK.tot), 'TOTAL INFANTIL', 'Corrida Kids', 'var(--laranja)']
+    [nf(rK.tot), 'TOTAL INFANTIL', 'crianças inscritas', 'var(--laranja)'],
+    [nf(RES), 'RESERVA SESP', 'no gasto, não produz agora', 'var(--muted)']
   ];
   document.getElementById('kpis').innerHTML=rows.map(r=>'<div class="kpi"><div class="l">'+r[1]+'</div><div class="n" style="color:'+r[3]+'">'+r[0]+'</div><div class="s">'+r[2]+'</div></div>').join('');
 }
