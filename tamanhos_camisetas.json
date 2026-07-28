@@ -3,8 +3,6 @@
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)",
  "meta_participantes": 2500,
  "contratado_camisetas": 2130,
- "trofeus_por_categoria": 3,
- "trofeus_geral_top": 5,
  "total_inscritos": 1309,
  "adultos_inscritos": 1071,
  "menores_inscritos": 238,
@@ -12,11 +10,61 @@
  "adulto_sem_tamanho": 470,
  "infantil_com_tamanho": 152,
  "infantil_sem_tamanho": 86,
- "genero": {"adulto_masc": 534, "adulto_fem": 537, "infantil_masc": 131, "infantil_fem": 107},
- "adulto_homologado": {"PP":55,"P":99,"M":118,"G":121,"GG":47,"EXG":9,"EXGG":4},
- "adulto_isento_nao_homologado": {"PP":16,"P":27,"M":49,"G":37,"GG":16,"EXG":3,"EXGG":0},
- "infantil": {"PP":105,"P":33,"M":9,"G":3,"GG":2},
- "categorias_corrida": ["A 20","A 25","A 30","A 35","M 40 / F 40","M 45 / F 45","M 50 / F 50","M 55 / F 55","M 60 / F 60","M 65 / F 65","M 70+ / F 70+","Sub 18","Sub 20"],
- "categorias_kids": ["Sub 07","Sub 09","Sub 11","Sub 14"],
- "plano_producao": {"empenhado_total":2134,"reserva_sesp":300,"staff":200}
+ "genero": {
+  "adulto_masc": 534,
+  "adulto_fem": 537,
+  "infantil_masc": 131,
+  "infantil_fem": 107
+ },
+ "adulto_homologado": {
+  "PP": 55,
+  "P": 99,
+  "M": 118,
+  "G": 121,
+  "GG": 47,
+  "EXG": 9,
+  "EXGG": 4
+ },
+ "adulto_isento_nao_homologado": {
+  "PP": 16,
+  "P": 27,
+  "M": 49,
+  "G": 37,
+  "GG": 16,
+  "EXG": 3,
+  "EXGG": 0
+ },
+ "infantil": {
+  "PP": 105,
+  "P": 33,
+  "M": 9,
+  "G": 3,
+  "GG": 2
+ },
+ "plano_producao": {
+  "empenhado_total": 2134,
+  "reserva_sesp": 300,
+  "staff": 200
+ },
+ "premiacao": {
+  "medalha_todos": true,
+  "geral_top": 5,
+  "categoria_top": 3,
+  "faixas_etarias": [
+   "14 a 19 anos",
+   "20 a 24 anos",
+   "25 a 29 anos",
+   "30 a 34 anos",
+   "35 a 39 anos",
+   "40 a 44 anos",
+   "45 a 49 anos",
+   "50 a 54 anos",
+   "55 a 59 anos",
+   "60 a 64 anos",
+   "65 a 69 anos",
+   "70 anos ou mais"
+  ],
+  "kids_trofeu": false,
+  "fonte": "Regulamento GCM 2026, art. 9"
+ }
 }

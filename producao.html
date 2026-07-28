@@ -123,22 +123,39 @@ td.prod{text-align:right;font-weight:800;color:var(--amarelo);font-variant-numer
 <div class="mt">
   <div class="card">
     <h2>🏅 Medalhas</h2>
-    <div class="hint">Todos os participantes recebem medalha de conclusão.</div>
+    <div class="hint">Art. 9.1 — todos os concluintes recebem medalha (peça única, igual para todos).</div>
     <div class="big med" id="medNum">—</div>
     <div class="sub" id="medSub"></div>
   </div>
   <div class="card">
     <h2>🏆 Troféus</h2>
-    <div class="hint">Geral 7 km: 1º ao <b id="gt">5</b>º (M e F). Categorias (corrida e kids): 1º ao <b id="tpc">3</b>º por sexo. Caminhada não tem troféu. Conferir no regulamento.</div>
+    <div class="hint">Art. 9.2 — Corrida 7 km. Geral (1º ao <b id="gt">5</b>º M e F) + faixas etárias (1º ao <b id="ct">3</b>º M e F).</div>
     <div class="big tro" id="troNum">—</div>
     <div class="sub" id="troSub"></div>
   </div>
 </div>
 
 <div class="card">
-  <h2>Troféus — detalhamento</h2>
-  <div class="hint">Somente Corrida 7 km e Corrida Kids. Confira as regras no regulamento oficial.</div>
-  <table id="tblTro"></table>
+  <h2>Premiação — descritivo (Regulamento art. 9)</h2>
+  <div class="hint">Base para a produção de troféus e etiquetas. Somente Corrida 7 km; caminhada não tem troféu.</div>
+  <table id="tblPrem"></table>
+</div>
+
+<div class="row2">
+  <div class="card">
+    <h2>Troféus por colocação (etiquetas)</h2>
+    <div class="hint">Quantas etiquetas de cada colocação a gráfica produz.</div>
+    <table id="tblColoc"></table>
+  </div>
+  <div class="card">
+    <h2>Troféus por categoria</h2>
+    <div class="hint">Detalhe por segmento premiado.</div>
+    <table id="tblCat"></table>
+  </div>
+</div>
+
+<div class="card" id="kidsNota" style="border-color:var(--laranja)">
+  <div class="hint" style="margin:0"><b style="color:var(--laranja)">Atenção:</b> o Regulamento (art. 9) <b>não prevê troféu para a Corrida Kids</b> — as crianças recebem apenas medalha. Se a organização decidir premiar os kids, me avise que eu incluo no cálculo.</div>
 </div>
 
 <div class="foot" id="foot"></div>
@@ -150,8 +167,6 @@ const DATA = {
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)",
  "meta_participantes": 2500,
  "contratado_camisetas": 2130,
- "trofeus_por_categoria": 3,
- "trofeus_geral_top": 5,
  "total_inscritos": 1309,
  "adultos_inscritos": 1071,
  "menores_inscritos": 238,
@@ -159,15 +174,64 @@ const DATA = {
  "adulto_sem_tamanho": 470,
  "infantil_com_tamanho": 152,
  "infantil_sem_tamanho": 86,
- "genero": {"adulto_masc": 534, "adulto_fem": 537, "infantil_masc": 131, "infantil_fem": 107},
- "adulto_homologado": {"PP":55,"P":99,"M":118,"G":121,"GG":47,"EXG":9,"EXGG":4},
- "adulto_isento_nao_homologado": {"PP":16,"P":27,"M":49,"G":37,"GG":16,"EXG":3,"EXGG":0},
- "infantil": {"PP":105,"P":33,"M":9,"G":3,"GG":2},
- "categorias_corrida": ["A 20","A 25","A 30","A 35","M 40 / F 40","M 45 / F 45","M 50 / F 50","M 55 / F 55","M 60 / F 60","M 65 / F 65","M 70+ / F 70+","Sub 18","Sub 20"],
- "categorias_kids": ["Sub 07","Sub 09","Sub 11","Sub 14"],
- "plano_producao": {"empenhado_total":2134,"reserva_sesp":300,"staff":200}
-}
-;
+ "genero": {
+  "adulto_masc": 534,
+  "adulto_fem": 537,
+  "infantil_masc": 131,
+  "infantil_fem": 107
+ },
+ "adulto_homologado": {
+  "PP": 55,
+  "P": 99,
+  "M": 118,
+  "G": 121,
+  "GG": 47,
+  "EXG": 9,
+  "EXGG": 4
+ },
+ "adulto_isento_nao_homologado": {
+  "PP": 16,
+  "P": 27,
+  "M": 49,
+  "G": 37,
+  "GG": 16,
+  "EXG": 3,
+  "EXGG": 0
+ },
+ "infantil": {
+  "PP": 105,
+  "P": 33,
+  "M": 9,
+  "G": 3,
+  "GG": 2
+ },
+ "plano_producao": {
+  "empenhado_total": 2134,
+  "reserva_sesp": 300,
+  "staff": 200
+ },
+ "premiacao": {
+  "medalha_todos": true,
+  "geral_top": 5,
+  "categoria_top": 3,
+  "faixas_etarias": [
+   "14 a 19 anos",
+   "20 a 24 anos",
+   "25 a 29 anos",
+   "30 a 34 anos",
+   "35 a 39 anos",
+   "40 a 44 anos",
+   "45 a 49 anos",
+   "50 a 54 anos",
+   "55 a 59 anos",
+   "60 a 64 anos",
+   "65 a 69 anos",
+   "70 anos ou mais"
+  ],
+  "kids_trofeu": false,
+  "fonte": "Regulamento GCM 2026, art. 9"
+ }
+};
 const SZ_A=["PP","P","M","G","GG","EXG","EXGG"];
 const SZ_K=["PP","P","M","G","GG"];
 const TPC=DATA.trofeus_por_categoria||3;
@@ -227,33 +291,40 @@ function kpis(rA,rK){
   document.getElementById('kpis').innerHTML=rows.map(r=>'<div class="kpi"><div class="l">'+r[1]+'</div><div class="n" style="color:'+r[3]+'">'+r[0]+'</div><div class="s">'+r[2]+'</div></div>').join('');
 }
 function medalhasTrofeus(){
+  const P=DATA.premiacao||{geral_top:5,categoria_top:3,faixas_etarias:[]};
+  const GT=P.geral_top||5, CT=P.categoria_top||3, faixas=P.faixas_etarias||[], nF=faixas.length;
+  // Medalhas = todos os atletas concluintes (não staff, não reserva)
   document.getElementById('medNum').textContent=nf(ATLETAS);
-  document.getElementById('medSub').innerHTML='= atletas da prova ('+nf(ATLETAS)+'). Staff e reserva SESP não recebem medalha.';
-  const GT=DATA.trofeus_geral_top||5;
-  const nC=(DATA.categorias_corrida||[]).length, nK=(DATA.categorias_kids||[]).length;
-  const troGeral=GT*2;              // classificação geral corrida 7km: top GT masc + top GT fem
-  const troC=nC*2*TPC;             // categorias corrida × 2 sexos × TPC
-  const troK=nK*2*TPC;             // categorias kids × 2 sexos × TPC
-  const troTot=troGeral+troC+troK;
-  document.getElementById('tpc').textContent=TPC;var _gt=document.getElementById('gt');if(_gt)_gt.textContent=(DATA.trofeus_geral_top||5);
+  document.getElementById('medSub').innerHTML='= atletas da prova ('+nf(ATLETAS)+') — corrida, caminhada e kids. Staff e reserva SESP não recebem.';
+  const gEl=document.getElementById('gt'); if(gEl)gEl.textContent=GT;
+  const cEl=document.getElementById('ct'); if(cEl)cEl.textContent=CT;
+  const troGeral=GT*2, troCat=nF*2*CT, troTot=troGeral+troCat;
   document.getElementById('troNum').textContent=nf(troTot);
-  document.getElementById('troSub').innerHTML='Geral 7 km ('+GT+'º M+F) + '+nC+' cat. corrida + '+nK+' cat. kids × 2 sexos × '+TPC+'. Sem troféu para caminhada.';
-  const rows=[['Geral · Corrida 7 km','1º ao '+GT+'º · M e F',troGeral],['Categorias · Corrida 7 km',nC+' cat × 2 sexos × '+TPC,troC],['Corrida Kids',nK+' cat × 2 sexos × '+TPC,troK]];
-  let h='<tr><th>Premiação</th><th>Critério</th><th class="num">Troféus</th></tr>';
-  rows.forEach(r=>h+='<tr><td class="sz" style="font-size:13px">'+r[0]+'</td><td class="mf">'+r[1]+'</td><td class="prod">'+nf(r[2])+'</td></tr>');
-  h+='<tr class="tot"><td>TOTAL</td><td></td><td class="prod">'+nf(troTot)+'</td></tr>';
-  document.getElementById('tblTro').innerHTML=h;
-}
-function cobertura(){
-  const ai=DATA.adultos_inscritos, ac=DATA.adulto_com_tamanho, as_=DATA.adulto_sem_tamanho;
-  const ki=DATA.menores_inscritos, kc=DATA.infantil_com_tamanho, ks=DATA.infantil_sem_tamanho;
-  const ti=ai+ki, tc=ac+kc, tsz=as_+ks;
-  document.getElementById('chipCob').textContent=(tc/ti*100).toFixed(0)+'% definido';
-  let h='<tr><th>Grupo</th><th class="num">Inscritos</th><th class="num">Com tamanho</th><th class="num">Sem tamanho</th><th class="num">Cobertura</th></tr>';
-  const rows=[['Adulto',ai,ac,as_],['Infantil (Kids)',ki,kc,ks]];
-  rows.forEach(r=>h+='<tr><td class="sz" style="font-size:13px">'+r[0]+'</td><td class="num">'+nf(r[1])+'</td><td class="num" style="color:var(--verde);font-weight:700">'+nf(r[2])+'</td><td class="num" style="color:var(--coral)">'+nf(r[3])+'</td><td class="num">'+(r[2]/r[1]*100).toFixed(0)+'%</td></tr>');
-  h+='<tr class="tot"><td>TOTAL</td><td class="num">'+nf(ti)+'</td><td class="num">'+nf(tc)+'</td><td class="num">'+nf(tsz)+'</td><td class="num">'+(tc/ti*100).toFixed(0)+'%</td></tr>';
-  document.getElementById('tblCob').innerHTML=h;
+  document.getElementById('troSub').innerHTML='Geral 1º–'+GT+'º (M+F) + '+nF+' faixas × 2 sexos × 1º–'+CT+'º = '+nf(troTot)+' troféus.';
+  // tabela descritiva
+  let h='<tr><th>Premiação</th><th>Colocações</th><th>Sexos</th><th class="num">Troféus</th></tr>';
+  h+='<tr><td class="sz" style="font-size:13px">Classificação Geral · 7 km</td><td class="mf">1º ao '+GT+'º</td><td class="mf">M e F</td><td class="prod">'+troGeral+'</td></tr>';
+  h+='<tr><td class="sz" style="font-size:13px">Categorias por faixa etária ('+nF+')</td><td class="mf">1º ao '+CT+'º</td><td class="mf">M e F</td><td class="prod">'+troCat+'</td></tr>';
+  h+='<tr class="tot"><td>TOTAL</td><td></td><td></td><td class="prod">'+troTot+'</td></tr>';
+  document.getElementById('tblPrem').innerHTML=h;
+  // por colocação (etiquetas)
+  let hc='<tr><th>Colocação</th><th class="num">Geral</th><th class="num">Categorias</th><th class="num">Total</th></tr>';
+  let somaG=0,somaC=0,somaT=0;
+  const maxP=Math.max(GT,CT);
+  for(let p=1;p<=maxP;p++){
+    const gg=(p<=GT)?2:0;         // geral M+F
+    const cc=(p<=CT)?nF*2:0;      // faixas M+F
+    const tt=gg+cc; somaG+=gg;somaC+=cc;somaT+=tt;
+    hc+='<tr><td class="sz" style="font-size:14px">'+p+'º lugar</td><td class="num">'+gg+'</td><td class="num">'+cc+'</td><td class="prod">'+tt+'</td></tr>';
+  }
+  hc+='<tr class="tot"><td>TOTAL</td><td class="num">'+somaG+'</td><td class="num">'+somaC+'</td><td class="prod">'+somaT+'</td></tr>';
+  document.getElementById('tblColoc').innerHTML=hc;
+  // por categoria
+  let hk='<tr><th>Categoria</th><th>Sexos</th><th>Coloc.</th><th class="num">Troféus</th></tr>';
+  hk+='<tr><td class="sz" style="font-size:13px">Geral · 7 km</td><td class="mf">M e F</td><td class="mf">1º–'+GT+'º</td><td class="prod">'+troGeral+'</td></tr>';
+  faixas.forEach(fx=>{ hk+='<tr><td class="sz" style="font-size:13px">'+fx+'</td><td class="mf">M e F</td><td class="mf">1º–'+CT+'º</td><td class="prod">'+(2*CT)+'</td></tr>'; });
+  hk+='<tr class="tot"><td>TOTAL</td><td></td><td></td><td class="prod">'+troTot+'</td></tr>';
+  document.getElementById('tblCat').innerHTML=hk;
 }
 function desenha(){
   cobertura();
