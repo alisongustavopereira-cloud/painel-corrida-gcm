@@ -1,81 +1,21 @@
 {
- "atualizado_em": "2026-07-28T10:15:39-03:00",
+ "atualizado_em": "2026-07-28T11:47:27-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)",
  "meta_participantes": 2500,
  "trofeus_por_categoria": 3,
- "total_inscritos": 1304,
- "adultos_inscritos": 1067,
- "menores_inscritos": 237,
- "genero": {
-  "adulto_masc": 531,
-  "adulto_fem": 536,
-  "infantil_masc": 130,
-  "infantil_fem": 107
- },
- "adulto_homologado": {
-  "PP": 55,
-  "P": 99,
-  "M": 118,
-  "G": 121,
-  "GG": 47,
-  "EXG": 9,
-  "EXGG": 4
- },
- "adulto_isento_nao_homologado": {
-  "PP": 16,
-  "P": 27,
-  "M": 49,
-  "G": 37,
-  "GG": 16,
-  "EXG": 3,
-  "EXGG": 0
- },
- "infantil": {
-  "PP": 105,
-  "P": 33,
-  "M": 9,
-  "G": 3,
-  "GG": 2
- },
- "categorias_corrida": [
-  "A 20",
-  "A 25",
-  "A 30",
-  "A 35",
-  "M 40 / F 40",
-  "M 45 / F 45",
-  "M 50 / F 50",
-  "M 55 / F 55",
-  "M 60 / F 60",
-  "M 65 / F 65",
-  "M 70+ / F 70+",
-  "Sub 18",
-  "Sub 20"
- ],
- "categorias_caminhada": [
-  "A 20",
-  "A 25",
-  "A 30",
-  "A 35",
-  "M 40 / F 40",
-  "M 45 / F 45",
-  "M 50 / F 50",
-  "M 55 / F 55",
-  "M 60 / F 60",
-  "M 65 / F 65",
-  "M 70+ / F 70+",
-  "Sub 18",
-  "Sub 20"
- ],
- "categorias_kids": [
-  "Sub 07",
-  "Sub 09",
-  "Sub 11",
-  "Sub 14"
- ],
- "plano_producao": {
-  "empenhado_total": 2134,
-  "reserva_sesp": 300,
-  "staff": 200
- }
+ "trofeus_geral_top": 5,
+ "total_inscritos": 1307,
+ "adultos_inscritos": 1069,
+ "menores_inscritos": 238,
+ "adulto_com_tamanho": 601,
+ "adulto_sem_tamanho": 468,
+ "infantil_com_tamanho": 152,
+ "infantil_sem_tamanho": 86,
+ "genero": {"adulto_masc": 532, "adulto_fem": 537, "infantil_masc": 131, "infantil_fem": 107},
+ "adulto_homologado": {"PP":55,"P":99,"M":118,"G":121,"GG":47,"EXG":9,"EXGG":4},
+ "adulto_isento_nao_homologado": {"PP":16,"P":27,"M":49,"G":37,"GG":16,"EXG":3,"EXGG":0},
+ "infantil": {"PP":105,"P":33,"M":9,"G":3,"GG":2},
+ "categorias_corrida": ["A 20","A 25","A 30","A 35","M 40 / F 40","M 45 / F 45","M 50 / F 50","M 55 / F 55","M 60 / F 60","M 65 / F 65","M 70+ / F 70+","Sub 18","Sub 20"],
+ "categorias_kids": ["Sub 07","Sub 09","Sub 11","Sub 14"],
+ "plano_producao": {"empenhado_total":2134,"reserva_sesp":300,"staff":200}
 }
