@@ -78,7 +78,7 @@ td.prod{text-align:right;font-weight:800;color:#B5680B;font-variant-numeric:tabu
 <div class="alert">
   <div class="ic">🏭</div>
   <div><b>PRODUÇÃO IMEDIATA.</b> Produza já o <b>Confirmado</b> (tamanho definido) e adiante o <b>A produzir a mais</b>, que distribui o restante da meta pelo % atual de cada tamanho — sem esperar as inscrições que faltam confirmar. Atualização automática às <b>08h00, 13h00 e 17h00</b>.</div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="printbtn" style="text-decoration:none;background:#F4A24A" href="https://drive.google.com/drive/folders/1vZxfldmapFGvxvV9hN5w63aBw8ijO5se?usp=sharing" target="_blank" rel="noopener">🎨 Artes Gráficas</a><button class="printbtn" onclick="window.print()">🖨️ Imprimir / PDF</button></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="printbtn" style="background:#2A6DB5" onclick="atualizar(this)">🔄 Atualizar</button><a class="printbtn" style="text-decoration:none;background:#D97A1F" href="https://drive.google.com/drive/folders/1vZxfldmapFGvxvV9hN5w63aBw8ijO5se?usp=sharing" target="_blank" rel="noopener">🎨 Artes Gráficas</a><button class="printbtn" onclick="window.print()">🖨️ Imprimir / PDF</button></div>
 </div>
 
 <div class="kpis" id="kpis"></div>
@@ -162,7 +162,7 @@ td.prod{text-align:right;font-weight:800;color:#B5680B;font-variant-numeric:tabu
 
 </div>
 <script>
-const DATA = {
+let DATA = {
  "atualizado_em": "2026-07-28T18:08:04-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)",
  "meta_participantes": 2500,
@@ -241,26 +241,9 @@ const DATA = {
 };
 const SZ_A=["PP","P","M","G","GG","EXG","EXGG"];
 const SZ_K=["PP","P","M","G","GG"];
-const TPC=DATA.trofeus_por_categoria||3;
-const PL=DATA.plano_producao||{empenhado_total:2134,reserva_sesp:300,staff:200};
-const EMP=PL.empenhado_total||0, RES=PL.reserva_sesp||0, STAFF=PL.staff||0;
-const PROD=EMP-RES;            // a produzir agora
-const ATLETAS=PROD-STAFF;      // camisetas dos atletas (adulto+infantil)
 const nf=n=>Math.round(n).toLocaleString('pt-BR');
 const pct=(v,t)=>t?(v/t*100):0;
-
-const adultNow={}; SZ_A.forEach(s=>adultNow[s]=(DATA.adulto_homologado[s]||0)+(DATA.adulto_isento_nao_homologado[s]||0));
-const kidsNow={}; SZ_K.forEach(s=>kidsNow[s]=DATA.infantil[s]||0);
-const adultTot=SZ_A.reduce((a,s)=>a+adultNow[s],0);
-const kidsTot=SZ_K.reduce((a,s)=>a+kidsNow[s],0);
-const confTot=adultTot+kidsTot;
-// atletas divididos adulto/infantil pela proporção do confirmado; staff soma no adulto
-const kidsPool=Math.min(DATA.menores_inscritos||kidsTot, ATLETAS);  // infantil = crianças inscritas (grupo fechado)
-const adultAtletas=ATLETAS-kidsPool;
-const adultPool=adultAtletas+STAFF;
-const g=DATA.genero||{};
-const mfA=g.adulto_masc/((g.adulto_masc+g.adulto_fem)||1);
-const mfK=g.infantil_masc/((g.infantil_masc+g.infantil_fem)||1);
+let _chart;
 
 function tabela(el, sizes, now, tot, pool, cor, mfm, showMF){
   const max=Math.max(...sizes.map(s=>now[s]||0),1);
@@ -286,7 +269,28 @@ function tabela(el, sizes, now, tot, pool, cor, mfm, showMF){
   el.innerHTML=h;
   return {conf:sumConf, mais:sumMais, tot:sumTot};
 }
-function kpis(rA,rK){
+
+function render(){
+  const PL=DATA.plano_producao||{empenhado_total:2134,reserva_sesp:300,staff:200};
+  const EMP=PL.empenhado_total||0, RES=PL.reserva_sesp||0, STAFF=PL.staff||0;
+  const PROD=EMP-RES, ATLETAS=PROD-STAFF;
+  const adultNow={}; SZ_A.forEach(s=>adultNow[s]=(DATA.adulto_homologado[s]||0)+(DATA.adulto_isento_nao_homologado[s]||0));
+  const kidsNow={}; SZ_K.forEach(s=>kidsNow[s]=DATA.infantil[s]||0);
+  const adultTot=SZ_A.reduce((a,s)=>a+adultNow[s],0);
+  const kidsTot=SZ_K.reduce((a,s)=>a+kidsNow[s],0);
+  const confTot=adultTot+kidsTot;
+  const kidsPool=Math.min(DATA.menores_inscritos||kidsTot, ATLETAS);
+  const adultAtletas=ATLETAS-kidsPool, adultPool=adultAtletas+STAFF;
+  const g=DATA.genero||{};
+  const mfA=g.adulto_masc/((g.adulto_masc+g.adulto_fem)||1);
+  const mfK=g.infantil_masc/((g.infantil_masc+g.infantil_fem)||1);
+
+  document.getElementById('chipA').textContent='meta '+nf(adultPool);
+  document.getElementById('chipK').textContent='meta '+nf(kidsPool);
+  const rA=tabela(document.getElementById('tblA'), SZ_A, adultNow, adultTot, adultPool, 'var(--verde)', mfA, true);
+  const rK=tabela(document.getElementById('tblK'), SZ_K, kidsNow, kidsTot, kidsPool, 'var(--laranja)', mfK, false);
+
+  // KPIs
   const rows=[
     [nf(confTot), 'CONFIRMADO', 'tamanho definido — produzir já', 'var(--verde)'],
     [nf(PROD), 'A PRODUZIR (PROVA)', nf(EMP)+' pagas − '+nf(RES)+' SESP', 'var(--amarelo)'],
@@ -296,81 +300,85 @@ function kpis(rA,rK){
     [nf(RES), 'RESERVA SESP', 'no gasto, não produz agora', 'var(--muted)']
   ];
   document.getElementById('kpis').innerHTML=rows.map(r=>'<div class="kpi"><div class="l">'+r[1]+'</div><div class="n" style="color:'+r[3]+'">'+r[0]+'</div><div class="s">'+r[2]+'</div></div>').join('');
-}
-function medalhasTrofeus(){
-  const P=DATA.premiacao||{};
-  const GT=P.geral_top||5, CT=P.categoria_top||3;
-  const faixas=P.faixas_etarias||[], nF=faixas.length;
-  const kOn=!!P.kids_trofeu, KC=P.kids_categorias||[], nK=kOn?KC.length:0, KT=P.kids_top||3;
-  // medalhas + sacochilas = atletas concluintes
-  document.getElementById('medNum').textContent=nf(ATLETAS);
-  document.getElementById('medSub').innerHTML='= atletas da prova ('+nf(ATLETAS)+') — corrida, caminhada e kids. Staff e reserva SESP não recebem.';
-  var sc=document.getElementById('sacNum'); if(sc)sc.textContent=nf(ATLETAS);
-  var scs=document.getElementById('sacSub'); if(scs)scs.innerHTML='= 1 por atleta ('+nf(ATLETAS)+'), modelo único. Item do kit do atleta.';
-  const gEl=document.getElementById('gt'); if(gEl)gEl.textContent=GT;
-  const cEl=document.getElementById('ct'); if(cEl)cEl.textContent=CT;
-  const troGeral=GT*2, troFai=nF*2*CT, troKids=nK*2*KT, troTot=troGeral+troFai+troKids;
-  document.getElementById('troNum').textContent=nf(troTot);
-  document.getElementById('troSub').innerHTML='Geral 7 km ('+GT+'º M+F) + '+nF+' faixas ('+CT+'º) '+(kOn?'+ '+nK+' cat. kids ('+KT+'º) ':'')+'× 2 sexos = '+nf(troTot)+'.';
-  // descritivo
-  let h='<tr><th>Premiação</th><th>Colocações</th><th>Sexos</th><th class="num">Troféus</th></tr>';
-  h+='<tr><td class="sz" style="font-size:13px">Classificação Geral · 7 km</td><td class="mf">1º ao '+GT+'º</td><td class="mf">M e F</td><td class="prod">'+troGeral+'</td></tr>';
-  h+='<tr><td class="sz" style="font-size:13px">Categorias faixa etária ('+nF+') · 7 km</td><td class="mf">1º ao '+CT+'º</td><td class="mf">M e F</td><td class="prod">'+troFai+'</td></tr>';
-  if(kOn) h+='<tr><td class="sz" style="font-size:13px">Corrida Kids ('+nK+' cat.)</td><td class="mf">1º ao '+KT+'º</td><td class="mf">M e F</td><td class="prod">'+troKids+'</td></tr>';
-  h+='<tr class="tot"><td>TOTAL</td><td></td><td></td><td class="prod">'+troTot+'</td></tr>';
-  document.getElementById('tblPrem').innerHTML=h;
-  // por colocação (etiquetas)
-  const maxP=Math.max(GT,CT,kOn?KT:0);
-  let hc='<tr><th>Colocação</th><th class="num">Geral</th><th class="num">Faixas</th>'+(kOn?'<th class="num">Kids</th>':'')+'<th class="num">Total</th></tr>';
-  let sG=0,sF=0,sK=0,sT=0;
-  for(let p=1;p<=maxP;p++){
-    const gg=(p<=GT)?2:0, ff=(p<=CT)?nF*2:0, kk=(kOn&&p<=KT)?nK*2:0, tt=gg+ff+kk;
-    sG+=gg;sF+=ff;sK+=kk;sT+=tt;
-    hc+='<tr><td class="sz" style="font-size:14px">'+p+'º lugar</td><td class="num">'+gg+'</td><td class="num">'+ff+'</td>'+(kOn?'<td class="num">'+kk+'</td>':'')+'<td class="prod">'+tt+'</td></tr>';
-  }
-  hc+='<tr class="tot"><td>TOTAL</td><td class="num">'+sG+'</td><td class="num">'+sF+'</td>'+(kOn?'<td class="num">'+sK+'</td>':'')+'<td class="prod">'+sT+'</td></tr>';
-  document.getElementById('tblColoc').innerHTML=hc;
-  // por categoria
-  let hk='<tr><th>Categoria</th><th>Sexos</th><th>Coloc.</th><th class="num">Troféus</th></tr>';
-  hk+='<tr><td class="sz" style="font-size:13px">Geral · 7 km</td><td class="mf">M e F</td><td class="mf">1º–'+GT+'º</td><td class="prod">'+troGeral+'</td></tr>';
-  faixas.forEach(fx=>{ hk+='<tr><td class="sz" style="font-size:13px">'+fx+' · 7 km</td><td class="mf">M e F</td><td class="mf">1º–'+CT+'º</td><td class="prod">'+(2*CT)+'</td></tr>'; });
-  if(kOn) KC.forEach(fx=>{ hk+='<tr><td class="sz" style="font-size:13px">'+fx+' · Kids</td><td class="mf">M e F</td><td class="mf">1º–'+KT+'º</td><td class="prod">'+(2*KT)+'</td></tr>'; });
-  hk+='<tr class="tot"><td>TOTAL</td><td></td><td></td><td class="prod">'+troTot+'</td></tr>';
-  document.getElementById('tblCat').innerHTML=hk;
-}
-function cobertura(){
-  const ai=DATA.adultos_inscritos, ac=DATA.adulto_com_tamanho, as_=DATA.adulto_sem_tamanho;
-  const ki=DATA.menores_inscritos, kc=DATA.infantil_com_tamanho, ks=DATA.infantil_sem_tamanho;
-  const ti=ai+ki, tc=ac+kc, tsz=as_+ks;
-  document.getElementById('chipCob').textContent=(tc/ti*100).toFixed(0)+'% definido';
-  let h='<tr><th>Grupo</th><th class="num">Inscritos</th><th class="num">Com tamanho</th><th class="num">Sem tamanho</th><th class="num">Cobertura</th></tr>';
-  const rows=[['Adulto',ai,ac,as_],['Infantil (Kids)',ki,kc,ks]];
-  rows.forEach(r=>h+='<tr><td class="sz" style="font-size:13px">'+r[0]+'</td><td class="num">'+nf(r[1])+'</td><td class="num" style="color:var(--verde);font-weight:700">'+nf(r[2])+'</td><td class="num" style="color:var(--coral)">'+nf(r[3])+'</td><td class="num">'+(r[2]/r[1]*100).toFixed(0)+'%</td></tr>');
-  h+='<tr class="tot"><td>TOTAL</td><td class="num">'+nf(ti)+'</td><td class="num">'+nf(tc)+'</td><td class="num">'+nf(tsz)+'</td><td class="num">'+(tc/ti*100).toFixed(0)+'%</td></tr>';
-  document.getElementById('tblCob').innerHTML=h;
-}
-function desenha(){
-  cobertura();
-  document.getElementById('chipA').textContent='meta '+nf(adultPool);
-  document.getElementById('chipK').textContent='meta '+nf(kidsPool);
-  const rA=tabela(document.getElementById('tblA'), SZ_A, adultNow, adultTot, adultPool, 'var(--verde)', mfA, true);
-  const rK=tabela(document.getElementById('tblK'), SZ_K, kidsNow, kidsTot, kidsPool, 'var(--laranja)', mfK, false);
-  kpis(rA,rK);
-  medalhasTrofeus();
-  document.getElementById('planoInfo').innerHTML='<b>'+nf(EMP)+'</b> camisetas pagas/empenhadas (teto de gasto) − <b>'+nf(RES)+'</b> reserva SESP = <b>'+nf(PROD)+'</b> a produzir para a prova. Deste total: <b>'+nf(STAFF)+'</b> staff (distribuído na proporção adulto) + <b>'+nf(ATLETAS)+'</b> atletas (distribuído por tamanho pelo % confirmado). Valores editáveis no arquivo tamanhos_camisetas.json.';
+
+  // Plano info
+  document.getElementById('planoInfo').innerHTML='<b>'+nf(EMP)+'</b> camisetas pagas/empenhadas (teto de gasto) − <b>'+nf(RES)+'</b> reserva SESP = <b>'+nf(PROD)+'</b> a produzir para a prova. Deste total: <b>'+nf(STAFF)+'</b> staff (proporção adulto) + <b>'+nf(ATLETAS)+'</b> atletas, sendo <b>'+nf(kidsPool)+'</b> infantil (crianças inscritas) e <b>'+nf(adultAtletas)+'</b> adulto. A reserva SESP ('+nf(RES)+') conta no gasto mas não é produzida agora. Valores editáveis no arquivo tamanhos_camisetas.json.';
+
+  // Cobertura
+  (function(){
+    const ai=DATA.adultos_inscritos, ac=DATA.adulto_com_tamanho, as_=DATA.adulto_sem_tamanho;
+    const ki=DATA.menores_inscritos, kc=DATA.infantil_com_tamanho, ks=DATA.infantil_sem_tamanho;
+    const ti=ai+ki, tc=ac+kc, tsz=as_+ks;
+    document.getElementById('chipCob').textContent=(tc/ti*100).toFixed(0)+'% definido';
+    let h='<tr><th>Grupo</th><th class="num">Inscritos</th><th class="num">Com tamanho</th><th class="num">Sem tamanho</th><th class="num">Cobertura</th></tr>';
+    [['Adulto',ai,ac,as_],['Infantil (Kids)',ki,kc,ks]].forEach(r=>h+='<tr><td class="sz" style="font-size:13px">'+r[0]+'</td><td class="num">'+nf(r[1])+'</td><td class="num" style="color:var(--verde);font-weight:700">'+nf(r[2])+'</td><td class="num" style="color:var(--coral)">'+nf(r[3])+'</td><td class="num">'+(r[2]/r[1]*100).toFixed(0)+'%</td></tr>');
+    h+='<tr class="tot"><td>TOTAL</td><td class="num">'+nf(ti)+'</td><td class="num">'+nf(tc)+'</td><td class="num">'+nf(tsz)+'</td><td class="num">'+(tc/ti*100).toFixed(0)+'%</td></tr>';
+    document.getElementById('tblCob').innerHTML=h;
+  })();
+
+  // Medalhas / Troféus / Sacochilas
+  (function(){
+    const P=DATA.premiacao||{};
+    const GT=P.geral_top||5, CT=P.categoria_top||3;
+    const faixas=P.faixas_etarias||[], nF=faixas.length;
+    const kOn=!!P.kids_trofeu, KC=P.kids_categorias||[], nK=kOn?KC.length:0, KT=P.kids_top||3;
+    document.getElementById('medNum').textContent=nf(ATLETAS);
+    document.getElementById('medSub').innerHTML='= atletas da prova ('+nf(ATLETAS)+') — corrida, caminhada e kids. Staff e reserva SESP não recebem.';
+    var sc=document.getElementById('sacNum'); if(sc)sc.textContent=nf(ATLETAS);
+    var scs=document.getElementById('sacSub'); if(scs)scs.innerHTML='= 1 por atleta ('+nf(ATLETAS)+'), modelo único. Item do kit do atleta.';
+    var ge=document.getElementById('gt'); if(ge)ge.textContent=GT;
+    var ce=document.getElementById('ct'); if(ce)ce.textContent=CT;
+    const troGeral=GT*2, troFai=nF*2*CT, troKids=nK*2*KT, troTot=troGeral+troFai+troKids;
+    document.getElementById('troNum').textContent=nf(troTot);
+    document.getElementById('troSub').innerHTML='Geral 7 km ('+GT+'º M+F) + '+nF+' faixas ('+CT+'º) '+(kOn?'+ '+nK+' cat. kids ('+KT+'º) ':'')+'× 2 sexos = '+nf(troTot)+'.';
+    let h='<tr><th>Premiação</th><th>Colocações</th><th>Sexos</th><th class="num">Troféus</th></tr>';
+    h+='<tr><td class="sz" style="font-size:13px">Classificação Geral · 7 km</td><td class="mf">1º ao '+GT+'º</td><td class="mf">M e F</td><td class="prod">'+troGeral+'</td></tr>';
+    h+='<tr><td class="sz" style="font-size:13px">Categorias faixa etária ('+nF+') · 7 km</td><td class="mf">1º ao '+CT+'º</td><td class="mf">M e F</td><td class="prod">'+troFai+'</td></tr>';
+    if(kOn) h+='<tr><td class="sz" style="font-size:13px">Corrida Kids ('+nK+' cat.)</td><td class="mf">1º ao '+KT+'º</td><td class="mf">M e F</td><td class="prod">'+troKids+'</td></tr>';
+    h+='<tr class="tot"><td>TOTAL</td><td></td><td></td><td class="prod">'+troTot+'</td></tr>';
+    document.getElementById('tblPrem').innerHTML=h;
+    const maxP=Math.max(GT,CT,kOn?KT:0);
+    let hc='<tr><th>Colocação</th><th class="num">Geral</th><th class="num">Faixas</th>'+(kOn?'<th class="num">Kids</th>':'')+'<th class="num">Total</th></tr>';
+    let sG=0,sF=0,sK=0,sT=0;
+    for(let p=1;p<=maxP;p++){
+      const gg=(p<=GT)?2:0, ff=(p<=CT)?nF*2:0, kk=(kOn&&p<=KT)?nK*2:0, tt=gg+ff+kk;
+      sG+=gg;sF+=ff;sK+=kk;sT+=tt;
+      hc+='<tr><td class="sz" style="font-size:14px">'+p+'º lugar</td><td class="num">'+gg+'</td><td class="num">'+ff+'</td>'+(kOn?'<td class="num">'+kk+'</td>':'')+'<td class="prod">'+tt+'</td></tr>';
+    }
+    hc+='<tr class="tot"><td>TOTAL</td><td class="num">'+sG+'</td><td class="num">'+sF+'</td>'+(kOn?'<td class="num">'+sK+'</td>':'')+'<td class="prod">'+sT+'</td></tr>';
+    document.getElementById('tblColoc').innerHTML=hc;
+    let hk='<tr><th>Categoria</th><th>Sexos</th><th>Coloc.</th><th class="num">Troféus</th></tr>';
+    hk+='<tr><td class="sz" style="font-size:13px">Geral · 7 km</td><td class="mf">M e F</td><td class="mf">1º–'+GT+'º</td><td class="prod">'+troGeral+'</td></tr>';
+    faixas.forEach(fx=>{ hk+='<tr><td class="sz" style="font-size:13px">'+fx+' · 7 km</td><td class="mf">M e F</td><td class="mf">1º–'+CT+'º</td><td class="prod">'+(2*CT)+'</td></tr>'; });
+    if(kOn) KC.forEach(fx=>{ hk+='<tr><td class="sz" style="font-size:13px">'+fx+' · Kids</td><td class="mf">M e F</td><td class="mf">1º–'+KT+'º</td><td class="prod">'+(2*KT)+'</td></tr>'; });
+    hk+='<tr class="tot"><td>TOTAL</td><td></td><td></td><td class="prod">'+troTot+'</td></tr>';
+    document.getElementById('tblCat').innerHTML=hk;
+  })();
+
   document.getElementById('chartHint').textContent='Confirmado por tamanho (base da distribuição).';
-  const labels=SZ_A;
-  const dA=labels.map(s=>adultNow[s]||0), dK=labels.map(s=>kidsNow[s]||0);
-  if(window._chart)window._chart.destroy();
-  window._chart=new Chart(document.getElementById('cBar'),{type:'bar',data:{labels,datasets:[
+  document.getElementById('upd').textContent='Atualizado em '+new Date(DATA.atualizado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  const labels=SZ_A, dA=labels.map(s=>adultNow[s]||0), dK=labels.map(s=>kidsNow[s]||0);
+  if(_chart)_chart.destroy();
+  _chart=new Chart(document.getElementById('cBar'),{type:'bar',data:{labels,datasets:[
     {label:'Adulto (confirmado)',data:dA,backgroundColor:'#8CC63F'},
     {label:'Infantil (confirmado)',data:dK,backgroundColor:'#F4A24A'}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#3a3f5c'}}},
     scales:{x:{ticks:{color:'#3a3f5c'},grid:{color:'rgba(0,0,0,.06)'}},
     y:{ticks:{color:'#6b7089'},grid:{color:'rgba(0,0,0,.06)'}}}}});
 }
-document.getElementById('upd').textContent='Atualizado em '+new Date(DATA.atualizado_em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-document.getElementById('foot').innerHTML='Fonte: '+DATA.fonte+'. "A produzir a mais" distribui o restante da meta pelo % de tamanhos confirmados. M/F por tamanho é estimativa pela proporção geral por sexo (o sistema não cruza tamanho × sexo). Secretaria de Segurança Municipal · Guarda Municipal de Maringá.';
-desenha();
+
+async function atualizar(btn){
+  const prev=btn?btn.innerHTML:null;
+  if(btn){btn.innerHTML='⏳ Atualizando...';btn.disabled=true;}
+  try{
+    const r=await fetch('tamanhos_camisetas.json?t='+Date.now(),{cache:'no-store'});
+    if(r.ok) DATA=await r.json();
+  }catch(e){}
+  render();
+  if(btn){btn.innerHTML=prev;btn.disabled=false;btn.style.background='#2E8B57';setTimeout(function(){btn.style.background='#2A6DB5';},1200);}
+}
+document.getElementById('foot').innerHTML='Fonte: (DATA.fonte). "A produzir a mais" distribui o restante da meta pelo % de tamanhos confirmados. M/F por tamanho é estimativa pela proporção geral por sexo (o sistema não cruza tamanho × sexo). O botão Atualizar recarrega o último dado publicado pela automação (8h/13h/17h). Secretaria de Segurança Municipal · Guarda Municipal de Maringá.'.replace('(DATA.fonte)', DATA.fonte);
+render();
+atualizar();
 </script>
 </body></html>
