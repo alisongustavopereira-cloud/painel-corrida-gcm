@@ -1,8 +1,8 @@
 {
- "atualizado_em": "2026-07-29T08:15:38-03:00",
+ "atualizado_em": "2026-07-29T13:08:19-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 29/07/2026)",
- "total": 1320,
- "principal": 1080,
+ "total": 1322,
+ "principal": 1082,
  "menores": 240,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
@@ -10,7 +10,7 @@
  "cidades": [
   [
    "Maringá (PR)",
-   893
+   895
   ],
   [
    "Sarandi (PR)",
@@ -447,7 +447,7 @@
   ],
   [
    "2026-07-29",
-   1,
+   3,
    1
   ]
  ]
