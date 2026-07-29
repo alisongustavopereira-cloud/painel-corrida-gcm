@@ -1,20 +1,20 @@
 {
- "atualizado_em": "2026-07-28T19:08:21-03:00",
- "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 28/07/2026)",
- "total": 1314,
- "principal": 1076,
- "menores": 238,
+ "atualizado_em": "2026-07-29T08:15:38-03:00",
+ "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 29/07/2026)",
+ "total": 1320,
+ "principal": 1080,
+ "menores": 240,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   890
+   893
   ],
   [
    "Sarandi (PR)",
-   144
+   146
   ],
   [
    "Paiçandu (PR)",
@@ -26,7 +26,7 @@
   ],
   [
    "Marialva (PR)",
-   26
+   27
   ],
   [
    "Apucarana (PR)",
@@ -193,11 +193,11 @@
    1
   ],
   [
-   "São João do Ivaí (PR)",
+   "São Jorge do Ivaí (PR)",
    1
   ],
   [
-   "São Jorge do Ivaí (PR)",
+   "São João do Ivaí (PR)",
    1
   ],
   [
@@ -442,7 +442,12 @@
   ],
   [
    "2026-07-28",
-   11,
+   14,
+   2
+  ],
+  [
+   "2026-07-29",
+   1,
    1
   ]
  ]
