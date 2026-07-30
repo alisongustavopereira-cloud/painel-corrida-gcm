@@ -1,20 +1,20 @@
 {
- "atualizado_em": "2026-07-29T19:06:24-03:00",
- "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 29/07/2026)",
- "total": 1329,
- "principal": 1086,
- "menores": 243,
+ "atualizado_em": "2026-07-30T08:08:40-03:00",
+ "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 30/07/2026)",
+ "total": 1336,
+ "principal": 1091,
+ "menores": 245,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   901
+   904
   ],
   [
    "Sarandi (PR)",
-   146
+   148
   ],
   [
    "Paiçandu (PR)",
@@ -26,7 +26,7 @@
   ],
   [
    "Marialva (PR)",
-   27
+   28
   ],
   [
    "Apucarana (PR)",
@@ -174,6 +174,10 @@
   ],
   [
    "Indianópolis (PR)",
+   1
+  ],
+  [
+   "Mariluz (PR)",
    1
   ],
   [
@@ -447,8 +451,13 @@
   ],
   [
    "2026-07-29",
-   7,
-   4
+   10,
+   5
+  ],
+  [
+   "2026-07-30",
+   2,
+   1
   ]
  ]
 }
