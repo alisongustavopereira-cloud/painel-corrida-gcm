@@ -1,16 +1,16 @@
 {
- "atualizado_em": "2026-07-31T08:18:24-03:00",
+ "atualizado_em": "2026-07-31T13:08:11-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 31/07/2026)",
- "total": 1356,
- "principal": 1109,
- "menores": 247,
+ "total": 1360,
+ "principal": 1112,
+ "menores": 248,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   916
+   918
   ],
   [
    "Sarandi (PR)",
@@ -18,7 +18,7 @@
   ],
   [
    "Paiçandu (PR)",
-   50
+   51
   ],
   [
    "Doutor Camargo (PR)",
@@ -61,11 +61,11 @@
    7
   ],
   [
-   "Mandaguari (PR)",
-   6
+   "Paranavaí (PR)",
+   7
   ],
   [
-   "Paranavaí (PR)",
+   "Mandaguari (PR)",
    6
   ],
   [
@@ -462,6 +462,11 @@
    "2026-07-30",
    20,
    3
+  ],
+  [
+   "2026-07-31",
+   3,
+   1
   ]
  ]
 }
