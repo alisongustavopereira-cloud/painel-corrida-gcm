@@ -1,24 +1,24 @@
 {
- "atualizado_em": "2026-07-31T13:08:11-03:00",
- "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 31/07/2026)",
- "total": 1360,
- "principal": 1112,
- "menores": 248,
+ "atualizado_em": "2026-08-01T12:42:25-03:00",
+ "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 01/08/2026)",
+ "total": 1368,
+ "principal": 1118,
+ "menores": 250,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   918
+   922
   ],
   [
    "Sarandi (PR)",
-   149
+   150
   ],
   [
    "Paiçandu (PR)",
-   51
+   52
   ],
   [
    "Doutor Camargo (PR)",
@@ -26,14 +26,14 @@
   ],
   [
    "Marialva (PR)",
-   28
+   29
   ],
   [
    "Apucarana (PR)",
    20
   ],
   [
-   "Jandaia do Sul (PR)",
+   "Jandaia Do Sul (PR)",
    13
   ],
   [
@@ -57,11 +57,11 @@
    8
   ],
   [
-   "Mandaguaçu (PR)",
-   7
+   "Paranavaí (PR)",
+   8
   ],
   [
-   "Paranavaí (PR)",
+   "Mandaguaçu (PR)",
    7
   ],
   [
@@ -69,7 +69,7 @@
    6
   ],
   [
-   "São Jorge do Ivaí (PR)",
+   "São Jorge Do Ivaí (PR)",
    6
   ],
   [
@@ -85,15 +85,15 @@
    4
   ],
   [
-   "Planaltina do Paraná (PR)",
+   "Planaltina Do Paraná (PR)",
    4
   ],
   [
-   "Cruzeiro do Sul (PR)",
+   "Cruzeiro Do Sul (PR)",
    3
   ],
   [
-   "Paraíso do Norte (PR)",
+   "Paraíso Do Norte (PR)",
    3
   ],
   [
@@ -137,11 +137,11 @@
    2
   ],
   [
-   "Santa Cruz de Monte Castelo (PR)",
+   "Santa Cruz De Monte Castelo (PR)",
    2
   ],
   [
-   "São Pedro do Ivaí (PR)",
+   "São Pedro Do Ivaí (PR)",
    2
   ],
   [
@@ -161,7 +161,7 @@
    1
   ],
   [
-   "Cruzeiro do Oeste (PR)",
+   "Cruzeiro Do Oeste (PR)",
    1
   ],
   [
@@ -169,7 +169,7 @@
    1
   ],
   [
-   "Foz do Iguaçu (PR)",
+   "Foz Do Iguaçu (PR)",
    1
   ],
   [
@@ -205,7 +205,7 @@
    1
   ],
   [
-   "São João do Ivaí (PR)",
+   "São João Do Ivaí (PR)",
    1
   ],
   [
@@ -465,8 +465,13 @@
   ],
   [
    "2026-07-31",
-   3,
-   1
+   5,
+   3
+  ],
+  [
+   "2026-08-01",
+   4,
+   0
   ]
  ]
 }
