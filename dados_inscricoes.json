@@ -1,24 +1,24 @@
 {
- "atualizado_em": "2026-08-01T13:14:09-03:00",
- "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 01/08/2026)",
- "total": 1368,
- "principal": 1118,
- "menores": 250,
+ "atualizado_em": "2026-08-04T10:50:23-03:00",
+ "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 04/08/2026)",
+ "total": 1426,
+ "principal": 1165,
+ "menores": 261,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   922
+   971
   ],
   [
    "Sarandi (PR)",
-   150
+   151
   ],
   [
    "Paiçandu (PR)",
-   52
+   53
   ],
   [
    "Doutor Camargo (PR)",
@@ -26,7 +26,7 @@
   ],
   [
    "Marialva (PR)",
-   29
+   31
   ],
   [
    "Apucarana (PR)",
@@ -53,16 +53,16 @@
    8
   ],
   [
+   "Mandaguaçu (PR)",
+   8
+  ],
+  [
    "Nova Esperança (PR)",
    8
   ],
   [
    "Paranavaí (PR)",
    8
-  ],
-  [
-   "Mandaguaçu (PR)",
-   7
   ],
   [
    "Mandaguari (PR)",
@@ -90,6 +90,10 @@
   ],
   [
    "Cruzeiro Do Sul (PR)",
+   3
+  ],
+  [
+   "Itambé (PR)",
    3
   ],
   [
@@ -125,11 +129,11 @@
    2
   ],
   [
-   "Itambé (PR)",
+   "Londrina (PR)",
    2
   ],
   [
-   "Londrina (PR)",
+   "Marilena (PR)",
    2
   ],
   [
@@ -190,6 +194,10 @@
   ],
   [
    "Nova Andradina (MS)",
+   1
+  ],
+  [
+   "Nova Londrina (PR)",
    1
   ],
   [
@@ -470,8 +478,23 @@
   ],
   [
    "2026-08-01",
-   4,
-   0
+   9,
+   1
+  ],
+  [
+   "2026-08-02",
+   16,
+   2
+  ],
+  [
+   "2026-08-03",
+   21,
+   4
+  ],
+  [
+   "2026-08-04",
+   5,
+   4
   ]
  ]
 }
