@@ -227,7 +227,6 @@ function render(){
   document.getElementById('chipK').textContent='meta '+nf(kidsPool);
   // STAFF (200) pela % dos adultos
   (function(){
-    const staff=distribui(STAFF, adultNow, adultTot? adultNow : {}, SZ_A);
     const dist=distribui(STAFF, adultNow, SZ_A);
     document.getElementById('chipS').textContent=nf(STAFF)+' un';
     let hs='<tr><th>Tam.</th><th class="num">% adulto</th><th class="num">M/F est.</th><th class="num">Quantidade</th></tr>';
