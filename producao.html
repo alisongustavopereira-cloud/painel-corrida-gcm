@@ -108,6 +108,12 @@ td.prod{text-align:right;font-weight:800;color:#B5680B;font-variant-numeric:tabu
 </div>
 
 <div class="card">
+  <h2>Camisetas do Staff <span class="chip" id="chipS"></span></h2>
+  <div class="hint">Grade estimada pela <b>mesma distribuição % dos adultos</b>, limitada a <b>200</b> (por dedução — sem formulário de tamanhos).</div>
+  <table id="tblStaff"></table>
+</div>
+
+<div class="card">
   <h2>Distribuição por tamanho</h2>
   <div class="hint" id="chartHint"></div>
   <div class="chartbox"><canvas id="cBar"></canvas></div>
@@ -162,12 +168,20 @@ td.prod{text-align:right;font-weight:800;color:#B5680B;font-variant-numeric:tabu
 
 </div>
 <script>
-let DATA = {"atualizado_em":"2026-08-03T18:12:02-03:00","fonte":"sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)","meta_participantes":2500,"contratado_camisetas":2130,"total_inscritos":1413,"adultos_inscritos":1156,"menores_inscritos":257,"adulto_homologado":{"PP":61,"P":115,"M":138,"G":133,"GG":50,"EXG":9,"EXGG":4},"adulto_isento_nao_homologado":{"PP":17,"P":33,"M":50,"G":40,"GG":17,"EXG":3,"EXGG":0},"infantil":{"PP":105,"P":33,"M":9,"G":3,"GG":3}};
+let DATA = {"atualizado_em":"2026-08-03T18:12:02-03:00","fonte":"sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)","meta_participantes":2500,"contratado_camisetas":2130,"total_inscritos":1413,"adultos_inscritos":1156,"menores_inscritos":257,"adulto_homologado":{"PP":61,"P":115,"M":138,"G":133,"GG":50,"EXG":9,"EXGG":4},"adulto_isento_nao_homologado":{"PP":17,"P":33,"M":50,"G":40,"GG":17,"EXG":3,"EXGG":0},"infantil":{"PP":105,"P":33,"M":9,"G":3,"GG":3}}
+;
 const SZ_A=["PP","P","M","G","GG","EXG","EXGG"];
 const SZ_K=["PP","P","M","G","GG"];
 const nf=n=>Math.round(n).toLocaleString('pt-BR');
 const pct=(v,t)=>t?(v/t*100):0;
 let _chart;
+function distribui(total, now, sizes){
+  const tot=sizes.reduce((a,s)=>a+(now[s]||0),0)||1;
+  const base=sizes.map(s=>{const v=total*(now[s]||0)/tot;return {s, n:Math.floor(v), r:v-Math.floor(v)};});
+  let rem=total-base.reduce((a,b)=>a+b.n,0);
+  base.slice().sort((a,b)=>b.r-a.r).slice(0,rem).forEach(b=>b.n++);
+  const out={}; base.forEach(b=>out[b.s]=b.n); return out;
+}
 
 function tabela(el, sizes, now, tot, pool, cor, mfm, showMF){
   const max=Math.max(...sizes.map(s=>now[s]||0),1);
@@ -204,14 +218,26 @@ function render(){
   const kidsTot=SZ_K.reduce((a,s)=>a+kidsNow[s],0);
   const confTot=adultTot+kidsTot;
   const kidsPool=Math.min(DATA.menores_inscritos||kidsTot, ATLETAS);
-  const adultAtletas=ATLETAS-kidsPool, adultPool=adultAtletas+STAFF;
+  const adultAtletas=ATLETAS-kidsPool;
   const g=DATA.genero||{};
   const mfA=g.adulto_masc/((g.adulto_masc+g.adulto_fem)||1);
   const mfK=g.infantil_masc/((g.infantil_masc+g.infantil_fem)||1);
 
-  document.getElementById('chipA').textContent='meta '+nf(adultPool);
+  document.getElementById('chipA').textContent='atletas '+nf(adultAtletas);
   document.getElementById('chipK').textContent='meta '+nf(kidsPool);
-  const rA=tabela(document.getElementById('tblA'), SZ_A, adultNow, adultTot, adultPool, 'var(--verde)', mfA, true);
+  // STAFF (200) pela % dos adultos
+  (function(){
+    const staff=distribui(STAFF, adultNow, adultTot? adultNow : {}, SZ_A);
+    const dist=distribui(STAFF, adultNow, SZ_A);
+    document.getElementById('chipS').textContent=nf(STAFF)+' un';
+    let hs='<tr><th>Tam.</th><th class="num">% adulto</th><th class="num">M/F est.</th><th class="num">Quantidade</th></tr>';
+    let tot=0;
+    SZ_A.forEach(sz=>{const q=dist[sz]||0; tot+=q; const p=adultTot?((adultNow[sz]||0)/adultTot*100):0; const m=Math.round(q*mfA), f=q-m;
+      hs+='<tr><td class="sz">'+sz+'</td><td class="num">'+p.toFixed(1)+'%</td><td class="num mf">'+m+' / '+f+'</td><td class="prod">'+nf(q)+'</td></tr>';});
+    hs+='<tr class="tot"><td>TOTAL</td><td class="num"></td><td class="num"></td><td class="prod">'+nf(tot)+'</td></tr>';
+    document.getElementById('tblStaff').innerHTML=hs;
+  })();
+  const rA=tabela(document.getElementById('tblA'), SZ_A, adultNow, adultTot, adultAtletas, 'var(--verde)', mfA, true);
   const rK=tabela(document.getElementById('tblK'), SZ_K, kidsNow, kidsTot, kidsPool, 'var(--laranja)', mfK, false);
 
   // KPIs
@@ -219,7 +245,7 @@ function render(){
     [nf(confTot), 'CONFIRMADO', 'tamanho definido — produzir já', 'var(--verde)'],
     [nf(PROD), 'A PRODUZIR (PROVA)', nf(EMP)+' pagas − '+nf(RES)+' SESP', 'var(--amarelo)'],
     [nf(rA.mais+rK.mais), 'A PRODUZIR A MAIS', 'distribuído pelo % atual', 'var(--laranja)'],
-    [nf(rA.tot), 'TOTAL ADULTO', 'atletas + '+nf(STAFF)+' staff', 'var(--navy)'],
+    [nf(rA.tot+STAFF), 'ADULTO (TOTAL)', nf(rA.tot)+' atletas + '+nf(STAFF)+' staff', 'var(--navy)'],
     [nf(rK.tot), 'TOTAL INFANTIL', 'crianças inscritas', 'var(--laranja)'],
     [nf(RES), 'RESERVA SESP', 'no gasto, não produz agora', 'var(--muted)']
   ];
