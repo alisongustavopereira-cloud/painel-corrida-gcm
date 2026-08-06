@@ -1,20 +1,20 @@
 {
- "atualizado_em": "2026-08-05T13:07:55-03:00",
- "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 05/08/2026)",
- "total": 1441,
- "principal": 1177,
- "menores": 264,
+ "atualizado_em": "2026-08-06T08:06:00-03:00",
+ "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 06/08/2026)",
+ "total": 1450,
+ "principal": 1183,
+ "menores": 267,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
  "cidades": [
   [
    "Maringá (PR)",
-   982
+   987
   ],
   [
    "Sarandi (PR)",
-   152
+   154
   ],
   [
    "Paiçandu (PR)",
@@ -65,11 +65,11 @@
    8
   ],
   [
-   "Mandaguari (PR)",
-   6
+   "São Jorge do Ivaí (PR)",
+   7
   ],
   [
-   "São Jorge do Ivaí (PR)",
+   "Mandaguari (PR)",
    6
   ],
   [
@@ -141,6 +141,10 @@
    2
   ],
   [
+   "Rolândia (PR)",
+   2
+  ],
+  [
    "Santa Cruz de Monte Castelo (PR)",
    2
   ],
@@ -206,10 +210,6 @@
   ],
   [
    "Pato Branco (PR)",
-   1
-  ],
-  [
-   "Rolândia (PR)",
    1
   ],
   [
@@ -498,8 +498,8 @@
   ],
   [
    "2026-08-05",
-   5,
-   0
+   11,
+   3
   ]
  ]
 }
