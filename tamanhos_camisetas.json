@@ -1,20 +1,20 @@
 {
- "atualizado_em": "2026-08-06T18:22:11-03:00",
+ "atualizado_em": "2026-08-07T08:40:39-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm — Resumo Inscrições (admin)",
  "meta_participantes": 2500,
  "contratado_camisetas": 2130,
- "total_inscritos": 1460,
- "adultos_inscritos": 1192,
- "menores_inscritos": 268,
+ "total_inscritos": 1469,
+ "adultos_inscritos": 1198,
+ "menores_inscritos": 271,
  "adulto_com_tamanho": 706,
- "adulto_sem_tamanho": 486,
+ "adulto_sem_tamanho": 492,
  "infantil_com_tamanho": 155,
- "infantil_sem_tamanho": 113,
+ "infantil_sem_tamanho": 116,
  "genero": {
-  "adulto_masc": 599,
-  "adulto_fem": 593,
-  "infantil_masc": 147,
-  "infantil_fem": 121
+  "adulto_masc": 602,
+  "adulto_fem": 596,
+  "infantil_masc": 148,
+  "infantil_fem": 123
  },
  "adulto_homologado": {
   "PP": 65,
