@@ -1,8 +1,8 @@
 {
- "atualizado_em": "2026-08-15T09:14:14-03:00",
+ "atualizado_em": "2026-08-15T13:07:36-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 15/08/2026)",
- "total": 1744,
- "principal": 1456,
+ "total": 1746,
+ "principal": 1458,
  "menores": 288,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
@@ -10,7 +10,7 @@
  "cidades": [
   [
    "Maringá (PR)",
-   1198
+   1199
   ],
   [
    "Sarandi (PR)",
@@ -26,7 +26,7 @@
   ],
   [
    "Marialva (PR)",
-   32
+   33
   ],
   [
    "Apucarana (PR)",
@@ -564,7 +564,7 @@
   ],
   [
    "2026-08-15",
-   7,
+   9,
    0
   ]
  ]
