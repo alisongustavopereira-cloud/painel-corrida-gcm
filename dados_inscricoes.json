@@ -1,9 +1,9 @@
 {
- "atualizado_em": "2026-08-16T13:33:47-03:00",
+ "atualizado_em": "2026-08-16T19:07:48-03:00",
  "fonte": "sisweb.maringa.pr.gov.br/prova_gcm (coleta automatica via Chrome 16/08/2026)",
- "total": 1747,
+ "total": 1748,
  "principal": 1459,
- "menores": 288,
+ "menores": 289,
  "meta_participantes": 2500,
  "evento": "2026-08-30",
  "prazo_propostas": "2026-07-28T14:00:00-03:00",
@@ -14,7 +14,7 @@
   ],
   [
    "Sarandi (PR)",
-   189
+   190
   ],
   [
    "Paiçandu (PR)",
@@ -566,6 +566,11 @@
    "2026-08-15",
    10,
    0
+  ],
+  [
+   "2026-08-16",
+   0,
+   1
   ]
  ]
 }
